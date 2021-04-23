@@ -1,0 +1,26 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id       String @id @db.Char(36)
+  email    String @unique @db.Char(60)
+  password String @db.Char(60)
+  role     Role   @default(ADMIN)
+  @@map(name: "users")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Token {
+  token String @id
+  @map(name: "tokens")
+}
