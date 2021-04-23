@@ -1,8 +1,11 @@
 import prisma from "../prisma";
-import generateToken from "./tokens";
+import { generateToken } from "../../../lib/auth/tokens";
 
 // authenticate and authorize
-export default login = async (req, res) => {
+const login = async (req, res) => {
+  if (req.method !== "POST") return res.sendStatus(405);
+  if (!req.body) return res.sendStatus(400);
+
   const { email, password } = req.body;
 
   try {
@@ -36,3 +39,5 @@ export default login = async (req, res) => {
     await prisma.$disconnect();
   }
 };
+
+export default login;

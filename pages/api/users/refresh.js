@@ -1,8 +1,11 @@
 import prisma from "../prisma";
-import refreshToken from "./tokens";
+import { refreshAccessToken } from "../../../lib/auth/tokens";
 
 // refresh token if valid
-export default refresh = async (req, res) => {
+const refresh = async (req, res) => {
+  if (req.method !== "POST") return res.sendStatus(405);
+  if (!req.body) return res.sendStatus(400);
+
   const { refreshToken } = req.body;
 
   try {
@@ -13,11 +16,13 @@ export default refresh = async (req, res) => {
       },
     });
 
-    if (!refreshTokenExists) return res.sendStatus(403);
+    // return error if user logged out
+    if (!refreshTokenExists) return res.sendStatus(404);
 
     // verify refresh token
-    const accessToken = refreshToken(refreshToken);
+    const accessToken = refreshAccessToken(refreshToken);
 
+    // if refresh token invalid, return error
     if (!accessToken) return res.sendStatus(403);
 
     res.status(200).json({ token: accessToken });
@@ -27,3 +32,5 @@ export default refresh = async (req, res) => {
     await prisma.$disconnect();
   }
 };
+
+export default refresh;

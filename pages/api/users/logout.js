@@ -1,8 +1,15 @@
+import prisma from "../prisma";
+import { authorize } from "../../../lib/auth/tokens";
+
 // delete refresh token
 const logout = async (req, res) => {
+  if (req.method !== "POST") return res.sendStatus(405);
+  if (!req.body) return res.sendStatus(400);
+
   const { refreshToken } = req.body;
 
   try {
+    // delete refresh token
     await prisma.token.delete({
       where: { id: refreshToken },
     });
@@ -16,4 +23,4 @@ const logout = async (req, res) => {
   }
 };
 
-export default authenticateToken(logout);
+export default authorize(logout);

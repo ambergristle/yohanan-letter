@@ -1,1 +1,3 @@
-export default async (req, res) => {};
+const user = async (req, res) => {};
+
+export default user;

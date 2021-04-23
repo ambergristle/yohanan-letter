@@ -1,14 +1,19 @@
 import bcrypt from "bcrypt";
 import prisma from "../prisma";
-import authenticateToken from "./tokens";
+import { authorize } from "../../../lib/auth/tokens";
 
 // register new user
 const register = async (req, res) => {
+  if (req.method !== "POST") return res.sendStatus(405);
+  if (!req.body) return res.sendStatus(400);
+
   const { email, password, role } = req.body;
   const auth = req.auth;
 
-  //// check user is authorized to create admin
-  if (role === "AUTH" && auth !== "AUTH") return res.sendStatus(401);
+  // if user not admin, return error
+  if (auth !== "ADMIN") {
+    return res.sendStatus(401);
+  }
 
   try {
     // check if email exists
@@ -18,6 +23,7 @@ const register = async (req, res) => {
       },
     });
 
+    // deny duplicate email creation
     if (userExists) return res.sendStatus(403);
 
     // hash password and create user
@@ -37,4 +43,4 @@ const register = async (req, res) => {
   }
 };
 
-export default authenticateToken(register);
+export default authorize(register);

@@ -1,1 +1,3 @@
-export default async (req, res) => {};
+const post = async (req, res) => {};
+
+export default post;

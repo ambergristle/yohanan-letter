@@ -1,9 +1,13 @@
-import Head from "next/head";
+// import Head from "next/head";
 
-export default () => {
+// most recent publication
+
+const Recent = () => {
   return (
     <>
       <div></div>
     </>
   );
 };
+
+export default Recent;
