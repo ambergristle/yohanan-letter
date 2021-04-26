@@ -9,10 +9,9 @@ const tryLogin = async (email, password, setSubmitting, setFieldError) => {
     });
 
     // redirect
+    console.log("success!");
     return response.status;
   } catch (error) {
-    setSubmitting(false); // allow form changes
-
     if (error.response) {
       const { field, helperText } = error.response.data;
       return setFieldError(field, helperText); // set form or field errors

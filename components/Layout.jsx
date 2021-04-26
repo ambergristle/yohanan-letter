@@ -2,6 +2,9 @@ import Head from "next/head";
 
 import { Container } from "@material-ui/core";
 
+import Header from "./Header";
+import Footer from "./Footer";
+
 const Layout = ({ children }) => {
   return (
     <>
@@ -9,9 +12,9 @@ const Layout = ({ children }) => {
         <title>Yohanan Letter</title>
         <meta name="keywords" content="adam yohanan, law, finance" />
       </Head>
-      // header
+      <Header />
       <Container>{children}</Container>
-      // footer
+      <Footer component="footer" />
     </>
   );
 };
