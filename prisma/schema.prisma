@@ -22,5 +22,5 @@ enum Role {
 
 model Token {
   token String @id
-  @map(name: "tokens")
+  @@map(name: "tokens")
 }

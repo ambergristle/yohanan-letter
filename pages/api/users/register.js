@@ -8,12 +8,6 @@ const register = async (req, res) => {
   if (!req.body) return res.sendStatus(400);
 
   const { email, password, role } = req.body;
-  const auth = req.auth;
-
-  // if user not admin, return error
-  if (auth !== "ADMIN") {
-    return res.sendStatus(401);
-  }
 
   try {
     // check if email exists
@@ -43,4 +37,4 @@ const register = async (req, res) => {
   }
 };
 
-export default authorize(register);
+export default authorize(register, true);

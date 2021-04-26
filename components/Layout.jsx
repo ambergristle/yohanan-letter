@@ -1,5 +1,7 @@
 import Head from "next/head";
 
+import { Container } from "@material-ui/core";
+
 const Layout = ({ children }) => {
   return (
     <>
@@ -8,7 +10,7 @@ const Layout = ({ children }) => {
         <meta name="keywords" content="adam yohanan, law, finance" />
       </Head>
       // header
-      {children}
+      <Container>{children}</Container>
       // footer
     </>
   );

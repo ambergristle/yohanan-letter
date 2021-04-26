@@ -1,10 +1,32 @@
-import prisma from "../prisma";
+import prisma from "../../../lib/prisma";
 import { generateToken } from "../../../lib/auth/tokens";
+
+// error fields and messages for formik handling
+const errors = {
+  request: {
+    field: "login",
+    helperText: "Request could not be proccessed",
+  },
+  email: {
+    field: "email",
+    helperText: "Email not found",
+  },
+  password: {
+    field: "password",
+    helperText: "Password is incorrect",
+  },
+  server: {
+    field: "login",
+    helperText: "Server error",
+  },
+};
 
 // authenticate and authorize
 const login = async (req, res) => {
-  if (req.method !== "POST") return res.sendStatus(405);
-  if (!req.body) return res.sendStatus(400);
+  if (req.method !== "POST") return res.status(405).json(errors.request);
+  if (!req.body) return res.status(400).json(errors.request);
+
+  return res.status(401).json(errors.server);
 
   const { email, password } = req.body;
 
@@ -17,7 +39,7 @@ const login = async (req, res) => {
     });
 
     // if user not found
-    if (!user) return res.sendStatus(404);
+    if (!user) return res.status(404).json(errors.email);
 
     // if user authenticated, generate tokens
     if (bcrypt.compare(password, user.password)) {
@@ -29,12 +51,14 @@ const login = async (req, res) => {
         data: { id: refreshToken },
       });
 
+      // authorize authenticated user
       return res.status(200).json({ accessToken, refreshToken });
     }
 
-    return res.sendStatus(401);
+    // password does not match
+    return res.status(401).json(errors.password);
   } catch (error) {
-    return res.sendStatus(500);
+    return res.status(500).json(errors.server);
   } finally {
     await prisma.$disconnect();
   }

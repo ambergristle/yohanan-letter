@@ -4,33 +4,34 @@ import { refreshAccessToken } from "../../../lib/auth/tokens";
 // refresh token if valid
 const refresh = async (req, res) => {
   if (req.method !== "POST") return res.sendStatus(405);
-  if (!req.body) return res.sendStatus(400);
+  if (!req.cookies) return res.sendStatus(400);
 
-  const { refreshToken } = req.body;
+  const { refreshToken } = req.cookies;
 
-  try {
-    // check if refresh token in db
-    const refreshTokenExists = await prisma.token.findUnique({
-      where: {
-        id: refreshToken,
-      },
-    });
+  if (!refreshToken in cookies)
+    try {
+      // check if refresh token in db
+      const refreshTokenExists = await prisma.token.findUnique({
+        where: {
+          id: refreshToken,
+        },
+      });
 
-    // return error if user logged out
-    if (!refreshTokenExists) return res.sendStatus(404);
+      // return error if user logged out
+      if (!refreshTokenExists) return res.sendStatus(404);
 
-    // verify refresh token
-    const accessToken = refreshAccessToken(refreshToken);
+      // verify refresh token
+      const accessToken = refreshAccessToken(refreshToken);
 
-    // if refresh token invalid, return error
-    if (!accessToken) return res.sendStatus(403);
+      // if refresh token invalid, return error
+      if (!accessToken) return res.sendStatus(403);
 
-    res.status(200).json({ token: accessToken });
-  } catch (error) {
-    res.sendStatus(500);
-  } finally {
-    await prisma.$disconnect();
-  }
+      res.status(200).json({ token: accessToken });
+    } catch (error) {
+      res.sendStatus(500);
+    } finally {
+      await prisma.$disconnect();
+    }
 };
 
 export default refresh;
