@@ -12,9 +12,8 @@ const Layout = ({ children }) => {
         <title>Yohanan Letter</title>
         <meta name="keywords" content="adam yohanan, law, finance" />
       </Head>
-      <Header />
+
       <Container>{children}</Container>
-      <Footer component="footer" />
     </>
   );
 };

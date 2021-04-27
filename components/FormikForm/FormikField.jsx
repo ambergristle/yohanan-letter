@@ -5,7 +5,7 @@ import { useField } from "formik";
 import { TextField, FormHelperText } from "@material-ui/core";
 
 // map formik props to TextField component
-const LoginField = ({ type, placeholder, ...props }) => {
+const FormikField = ({ type, placeholder, multiline, rows, ...props }) => {
   // field passes props required for form handling
   const [field, meta] = useField(props);
   // if field error and field touched, display error
@@ -18,6 +18,8 @@ const LoginField = ({ type, placeholder, ...props }) => {
       placeholder={placeholder}
       error={!!errorText}
       helperText={errorText}
+      multiline={multiline}
+      rows={rows}
       fullWidth
       variant="outlined"
       margin="dense"
@@ -25,4 +27,4 @@ const LoginField = ({ type, placeholder, ...props }) => {
   );
 };
 
-export default LoginField;
+export default FormikField;

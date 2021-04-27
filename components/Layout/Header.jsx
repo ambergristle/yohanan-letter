@@ -1,8 +1,8 @@
 import { AppBar, Toolbar, Box, makeStyles } from "@material-ui/core";
 
-import LogoButton from "./Nav/LogoButton";
-import MobileMenu from "./Menu/MobileMenu";
-import DesktopMenu from "./Menu/DesktopMenu";
+import LogoButton from "../Nav/LogoButton";
+import MobileMenu from "../Menu/MobileMenu";
+import DesktopMenu from "../Menu/DesktopMenu";
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
