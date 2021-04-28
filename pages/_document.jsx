@@ -8,11 +8,13 @@ class Document extends NextDocument {
     return (
       <Html lang="en">
         <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta charSet="utf-8" />
           <meta name="theme-color" content={theme.palette.primary.main} />
-          <title>Yohanan Letter</title>
-          <meta name="keywords" content="adam yohanan, law, finance" />
+          <link rel="stylesheet" href="styles.css" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap"
+            rel="stylesheet"
+          />
         </Head>
         <body>
           <Main />

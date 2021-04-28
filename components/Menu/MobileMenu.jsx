@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
 import {
+  Box,
   Popper,
   Paper,
   MenuList,
@@ -38,7 +39,7 @@ const MobileMenu = () => {
   }, [menuOpen]);
 
   return (
-    <>
+    <Box display={{ xs: "flex", sm: "none" }}>
       <Search />
       <IconButton
         ref={menuAnchorRef}
@@ -68,16 +69,16 @@ const MobileMenu = () => {
             <ClickAwayListener onClickAway={handleMenuClose}>
               <Paper>
                 <MenuList autoFocusItem={menuOpen} id="menu-list-grow">
-                  <NavMenuItem label={"archive"} href={"/"} />
-                  <NavMenuItem label={"bio"} href={"/bio"} />
-                  <NavMenuItem label={"contact"} href={"/contact"} />
+                  <NavMenuItem label="archive" href="/" />
+                  <NavMenuItem label="bio" href="/bio" />
+                  <NavMenuItem label="contact" href="/contact" />
                 </MenuList>
               </Paper>
             </ClickAwayListener>
           </Grow>
         )}
       </Popper>
-    </>
+    </Box>
   );
 };
 

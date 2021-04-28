@@ -1,6 +1,6 @@
 import React from "react";
 
-import { AppBar, Toolbar, Box, makeStyles } from "@material-ui/core";
+import { AppBar, Toolbar, makeStyles } from "@material-ui/core";
 
 import LogoButton from "../Nav/LogoButton";
 import MobileMenu from "../Menu/MobileMenu";
@@ -16,19 +16,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   toolbar: { justifyContent: "space-around" },
-  mobileMenu: {
-    display: "flex",
-    [theme.breakpoints.up("md")]: {
-      display: "none",
-    },
-  },
-  desktopMenu: {
-    width: "100%",
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
-  },
 }));
 
 const Header = () => {
@@ -38,12 +25,8 @@ const Header = () => {
     <AppBar position="sticky" color="transparent" className={classes.appbar}>
       <LogoButton />
       <Toolbar className={classes.toolbar}>
-        <Box className={classes.desktopMenu}>
-          <DesktopMenu />
-        </Box>
-        <Box className={classes.mobileMenu}>
-          <MobileMenu />
-        </Box>
+        <DesktopMenu />
+        <MobileMenu />
       </Toolbar>
     </AppBar>
   );

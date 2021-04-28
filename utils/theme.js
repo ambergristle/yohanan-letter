@@ -38,6 +38,9 @@ const theme = createMuiTheme({
         },
       },
     },
+    MuiFormControl: {
+      marginDense: { marginTop: 0 },
+    },
     MuiInputBase: {
       root: {
         backgroundColor: "rgba(51, 51, 51, 1)",
