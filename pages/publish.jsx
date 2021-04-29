@@ -1,9 +1,9 @@
 import React from "react";
 
-import Controls from "../components/Publisher/Controls";
+import Publisher from "../components/Publisher/Publisher";
 
 const Publish = () => {
-  return <Controls />;
+  return <Publisher />;
 };
 
 export default Publish;

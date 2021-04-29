@@ -4,9 +4,9 @@ import * as yup from "yup";
 
 import SendIcon from "@material-ui/icons/Send";
 
-import FormikForm from "../FormikForm/FormikForm";
-import FormikField from "../FormikForm/FormikField";
-import FormikButton from "../FormikForm/FormikButton";
+import FormikForm from "./FormikForm/FormikForm";
+import FormikField from "./FormikForm/FormikField";
+import FormikButton from "./FormikForm/FormikButton";
 
 const initialValues = { email: "", message: "" };
 

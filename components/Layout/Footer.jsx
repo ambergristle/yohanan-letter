@@ -2,8 +2,8 @@ import React from "react";
 
 import { Grid, Typography, makeStyles } from "@material-ui/core";
 
-import NavButton from "../Nav/NavButton";
-import SocialButton from "../Nav/SocialButton";
+import NavButton from "./Nav/NavButton";
+import SocialButton from "./Nav/SocialButton";
 
 const useStyles = makeStyles((theme) => ({
   footer: {

@@ -2,9 +2,9 @@ import React from "react";
 
 import * as yup from "yup";
 
-import FormikForm from "../FormikForm/FormikForm";
-import FormikField from "../FormikForm/FormikField";
-import FormikButton from "../FormikForm/FormikButton";
+import FormikForm from "./FormikForm/FormikForm";
+import FormikField from "./FormikForm/FormikField";
+import FormikButton from "./FormikForm/FormikButton";
 
 import tryLogin from "../../lib/auth/tryLogin";
 
