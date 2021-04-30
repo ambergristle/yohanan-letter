@@ -1,6 +1,6 @@
 import { Box, Chip } from "@material-ui/core";
 
-const TagList = ({ postId }) => {
+const TagList = ({ tags }) => {
   const filter = (tagId) => {
     console.log(tagId);
   };
@@ -9,6 +9,7 @@ const TagList = ({ postId }) => {
     <Box>
       {tags.map((tag) => (
         <Chip
+          key={tag.id}
           label={tag.name}
           onClick={() => filter(tag.id)}
           size="small"

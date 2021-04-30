@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import prisma from "../../../lib/prisma";
+import prisma from "../../../lib/prisma/prisma";
 import { generateToken } from "../../../lib/auth/tokens";
 import { setCookie } from "../../../lib/auth/cookies";
 

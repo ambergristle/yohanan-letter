@@ -5,6 +5,8 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import Layout from "../components/Layout/Layout";
 import theme from "../utils/theme";
 
+import "../styles/global.css";
+
 const App = ({ Component, pageProps }) => {
   // remove server-side jss to avoid styling conflicts
   useEffect(() => {

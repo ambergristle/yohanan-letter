@@ -1,4 +1,4 @@
-import Posts from "./posts/index";
+import Archive from "./archive/index";
 // most recent publication
 
 const Index = () => {

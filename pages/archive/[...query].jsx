@@ -4,7 +4,7 @@ import getPosts from "../../lib/posts/getPosts";
 
 import PostList from "../../components/Archive/PostList";
 
-const Archive = ({ posts }) => {
+const Archived = ({ posts }) => {
   posts = JSON.parse(posts);
 
   return (
@@ -19,12 +19,16 @@ const Archive = ({ posts }) => {
 
 // get posts server-side
 export const getServerSideProps = async (context) => {
+  const { query } = context.query;
+
+  const slug = query.join("/");
+
   // pass posts or null to component as props
-  const posts = (await getPosts()) || null;
+  const posts = (await getPosts(slug)) || null;
 
   return {
     props: { posts },
   };
 };
 
-export default Archive;
+export default Archived;

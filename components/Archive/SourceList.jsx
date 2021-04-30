@@ -1,15 +1,11 @@
-import { Typography, Link } from "@material-ui/core";
+import { Box, Typography, Link } from "@material-ui/core";
 
 const SourceList = ({ sources }) => {
-  const source = useSelector((state) =>
-    sourcesSelectors.selectById(state, sourceId)
-  );
-
   return (
     <Box>
       <Typography color="textSecondary">More Learning:</Typography>
       {sources.map((source) => (
-        <Typography>
+        <Typography key={source.id}>
           <Link
             aria-label={source.title}
             href={source.href}

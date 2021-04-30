@@ -1,3 +1,4 @@
+import React from "react";
 import NextDocument, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/core/styles";
 import theme from "../utils/theme";
@@ -8,7 +9,6 @@ class Document extends NextDocument {
       <Html lang="en">
         <Head>
           <meta name="theme-color" content={theme.palette.primary.main} />
-          <link rel="stylesheet" href="styles.css" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
             href="https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap"

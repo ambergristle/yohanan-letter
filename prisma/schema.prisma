@@ -26,7 +26,8 @@ model Token {
 }
 
 model Post {
-  id      String    @id @db.Char(36)
+  id      String @id @db.Char(36)
+  slug    String @unique
   date    DateTime
   topic   String
   content String
