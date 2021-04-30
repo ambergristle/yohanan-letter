@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Grid, Typography, Link } from "@material-ui/core";
 
 import FeedbackForm from "../components/Forms/FeedbackForm";

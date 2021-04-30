@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useField } from "formik";
 
 import { TextField, FormHelperText } from "@material-ui/core";

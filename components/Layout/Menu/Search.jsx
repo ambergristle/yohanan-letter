@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
+
 import {
   TextField,
   InputAdornment,
   IconButton,
   makeStyles,
 } from "@material-ui/core";
+
 import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme) => ({

@@ -24,3 +24,29 @@ model Token {
   token String @id
   @@map(name: "tokens")
 }
+
+model Post {
+  id      String    @id @db.Char(36)
+  date    DateTime
+  topic   String
+  content String
+  sources Source[]
+  tags    Tag[]
+  @@map(name: "posts")
+}
+
+model Source {
+  id     String @id @db.Char(36)
+  title  String
+  href   String
+  post   Post   @relation(fields: [postId], references: [id])
+  postId String @db.Char(36) @map("post_id")
+  @@map(name: "sources")
+}
+
+model Tag {
+  id    String @id @db.Char(36)
+  name  String @unique
+  posts Post[]
+  @@map(name: "tags")
+}

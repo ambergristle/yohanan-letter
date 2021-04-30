@@ -1,5 +1,3 @@
-import React from "react";
-
 import { AppBar, Toolbar, makeStyles } from "@material-ui/core";
 
 import LogoButton from "./Nav/LogoButton";

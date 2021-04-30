@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Container } from "@material-ui/core";
 
 import Controls from "./Controls/Controls";

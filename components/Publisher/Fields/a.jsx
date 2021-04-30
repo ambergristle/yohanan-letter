@@ -1,15 +1,15 @@
-import React from "react";
-
 import { TextField } from "@material-ui/core";
 
-const Field = () => {
+// subject, intro, topic
+
+const InfoField = () => {
   return (
     <TextField
       value={value}
       placeholder="Post Title"
       onChange={handleChange}
       multiline
-      rows={rows}
+      rows={6}
       fullWidth
       variant="outlined"
       margin="dense"
@@ -17,4 +17,4 @@ const Field = () => {
   );
 };
 
-export default Field;
+export default InfoField;

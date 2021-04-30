@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Grid, Typography, makeStyles } from "@material-ui/core";
 
 import NavButton from "./Nav/NavButton";
@@ -8,7 +6,7 @@ import SocialButton from "./Nav/SocialButton";
 const useStyles = makeStyles((theme) => ({
   footer: {
     backgroundColor: "rgba(34, 34, 34, 1)",
-    position: "relative",
+    position: "absolute",
     bottom: 0,
   },
 }));
