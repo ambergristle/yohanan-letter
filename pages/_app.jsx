@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
 // import CssBaseline from "@material-ui/core/CssBaseline";
 import Layout from "../components/Layout/Layout";
-import theme from "../utils/theme";
+import theme from "../styles/theme";
 
 import "../styles/global.css";
 
