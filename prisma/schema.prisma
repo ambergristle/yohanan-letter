@@ -25,6 +25,14 @@ model Token {
   @@map(name: "tokens")
 }
 
+// model Letter {
+//   id    String
+//   date  DateTime
+//   intro String
+//   posts Post[]
+//   @@map(name: "drafts")
+// }
+
 model Post {
   id      String @id @db.Char(36)
   slug    String @unique

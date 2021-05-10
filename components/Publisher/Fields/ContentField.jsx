@@ -1,23 +1,26 @@
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import dynamic from "next/dynamic";
 
-const ContentField = () => {
-  const modules = {
-    toolbar: false,
-    // toolbar: [["bold", "italic", "underline"]],
-  };
+// prevent quill load server-side
+const QuillWrapper = dynamic(() => import("react-quill"), {
+  ssr: false,
+  loading: () => <p>hi</p>,
+});
 
+const ContentField = ({ content, handleChange }) => {
+  const modules = { toolbar: false };
   const formats = ["bold", "italic", "underline"];
 
   return (
-    <ReactQuill
-      theme={null}
-      value={content}
-      placeholder="Create a new post here!"
-      onChange={handleChange}
-      modules={modules}
-      formats={formats}
-    />
+    <>
+      <QuillWrapper
+        theme={null}
+        value={content}
+        placeholder="Create a new post here!"
+        onChange={handleChange}
+        modules={modules}
+        formats={formats}
+      />
+    </>
   );
 };
 

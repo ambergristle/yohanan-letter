@@ -17,7 +17,6 @@ const Layout = ({ children }) => {
       <Box minHeight="100vh">
         <Header />
         <Container maxWidth="lg">{children}</Container>
-        <Footer />
       </Box>
     </>
   );

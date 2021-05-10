@@ -1,7 +1,7 @@
 import { TextField, Chip } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 
-const TagField = () => {
+const TagField = ({ tagList, selected, handleTagChange }) => {
   return (
     <Autocomplete
       name="tags"
@@ -10,7 +10,7 @@ const TagField = () => {
       getOptionLabel={({ name }) => name}
       filterSelectedOptions
       value={selected}
-      onChange={handleChange}
+      onChange={handleTagChange}
       freeSolo
       renderInput={(params) => (
         <TextField

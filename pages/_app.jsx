@@ -6,6 +6,7 @@ import Layout from "../components/Layout/Layout";
 import theme from "../styles/theme";
 
 import "../styles/global.css";
+import "react-quill/dist/quill.snow.css";
 
 const App = ({ Component, pageProps }) => {
   // remove server-side jss to avoid styling conflicts

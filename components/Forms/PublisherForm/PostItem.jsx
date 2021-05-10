@@ -1,0 +1,21 @@
+import FormikField from "../FormikForm/FormikField";
+import FormikArray from "../FormikForm/FormikArray";
+import SourceItem from "./SourceItem";
+
+const PostItem = ({ name, fields }) => {
+  console.log(name, fields);
+  return (
+    <>
+      <FormikField
+        name={`${name}.title`}
+        type="text"
+        placeholder="Post Title"
+      />
+      <FormikArray name={`${name}.sources`}>
+        <SourceItem />
+      </FormikArray>
+    </>
+  );
+};
+
+export default PostItem;
