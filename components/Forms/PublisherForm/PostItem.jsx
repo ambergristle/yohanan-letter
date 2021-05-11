@@ -1,4 +1,5 @@
 import FormikField from "../FormikForm/FormikField";
+import FormikQuill from "../FormikForm/FormikQuill";
 import FormikArray from "../FormikForm/FormikArray";
 import SourceItem from "./SourceItem";
 
@@ -10,6 +11,7 @@ const PostItem = ({ name, fields }) => {
         type="text"
         placeholder="Post Title"
       />
+      <FormikQuill name={`${name}.text`} />
       <FormikArray name={`${name}.sources`}>
         <SourceItem />
       </FormikArray>

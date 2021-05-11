@@ -4,13 +4,14 @@ import { nextSunday, format, set } from "date-fns";
 import { FieldArray } from "formik";
 
 import FormikForm from "../FormikForm/FormikForm";
+import FormikDate from "../FormikForm/FormikDate";
 import FormikField from "../FormikForm/FormikField";
 import FormikArray from "../FormikForm/FormikArray";
 import FormikButton from "../FormikForm/FormikButton";
 
-import FormikDate from "../FormikForm/FormikDate";
-
 import PostItem from "./PostItem";
+
+import FormikValues from "../FormikForm/FormikValues";
 
 const makeSource = () => ({ title: "", href: "" });
 
@@ -56,6 +57,7 @@ const PublisherForm = () => {
         <PostItem />
       </FormikArray>
       <FormikButton type="submit" label="save" />
+      <FormikValues />
     </FormikForm>
   );
 };
