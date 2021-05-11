@@ -3,7 +3,6 @@ import FormikArray from "../FormikForm/FormikArray";
 import SourceItem from "./SourceItem";
 
 const PostItem = ({ name, fields }) => {
-  console.log(name, fields);
   return (
     <>
       <FormikField

@@ -8,6 +8,8 @@ import FormikField from "../FormikForm/FormikField";
 import FormikArray from "../FormikForm/FormikArray";
 import FormikButton from "../FormikForm/FormikButton";
 
+import FormikDate from "../FormikForm/FormikDate";
+
 import PostItem from "./PostItem";
 
 const makeSource = () => ({ title: "", href: "" });
@@ -19,8 +21,14 @@ const makePost = () => ({
   tags: [],
 });
 
+const makeDate = () => {
+  const date = nextSunday(new Date());
+  const time = { hours: 8, minutes: 0, seconds: 0 };
+  return set(date, time);
+};
+
 const initialValues = {
-  date: "",
+  date: makeDate(),
   subject: "The Yohanan Letter - Legal News for Investors and Entrepreneurs",
   intro: "",
   posts: Array.from({ length: 3 }, () => makePost()),
@@ -31,6 +39,7 @@ const PublisherForm = () => {
 
   return (
     <FormikForm initialValues={initialValues} handleSubmit={tryPublish}>
+      <FormikDate name="date" />
       <FormikField
         name="subject"
         type="text"
