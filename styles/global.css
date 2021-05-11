@@ -10,6 +10,7 @@ strong {
 
 .quill {
   height: 25vh;
+  margin-bottom: 4px;
 }
 .ql-editor {
   padding: 6px 15px 7px 15px;

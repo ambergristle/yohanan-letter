@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { nextSunday, format, set } from "date-fns";
+import { DateTime } from "luxon";
 
 import { FieldArray } from "formik";
 
@@ -23,9 +23,12 @@ const makePost = () => ({
 });
 
 const makeDate = () => {
-  const date = nextSunday(new Date());
-  const time = { hours: 8, minutes: 0, seconds: 0, milliseconds: 0 };
-  return set(date, time);
+  return DateTime.fromObject({
+    hour: 8,
+    minute: 0,
+    second: 0,
+    zone: "America/New_York",
+  }).set({ weekday: 7 });
 };
 
 const initialValues = {
@@ -40,7 +43,7 @@ const PublisherForm = () => {
 
   return (
     <FormikForm initialValues={initialValues} handleSubmit={tryPublish}>
-      <FormikDate name="date" />
+      <FormikDate name="date" format="MMMM dd @ HH:mm ZZZZ" />
       <FormikField
         name="subject"
         type="text"

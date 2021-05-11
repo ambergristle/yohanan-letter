@@ -1,21 +1,11 @@
 import { useField } from "formik";
 
-import { parseISO, nextSunday, format, set } from "date-fns";
-
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { DateTimePicker } from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
+import LuxonUtils from "@date-io/luxon";
 
 import { InputAdornment } from "@material-ui/core";
 import EventIcon from "@material-ui/icons/Event";
-
-// const formattedDate = (date = new Date()) => {
-//   const sunday = nextSunday(date);
-//   const time = { hours: 8, minutes: 0, seconds: 0 };
-//   const iso = "yyyy-MM-dd'T'HH:mm:ss";
-//   const datetime = set(sunday, time)
-//   return format(datetime, iso);
-// };
 
 const FormikDate = ({ placeholder, format, ...props }) => {
   // field passes props required for form handling
@@ -23,7 +13,7 @@ const FormikDate = ({ placeholder, format, ...props }) => {
   const { setValue } = helpers;
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    <MuiPickersUtilsProvider utils={LuxonUtils}>
       <DateTimePicker
         {...field}
         onChange={(value) => setValue(value)}
@@ -31,6 +21,7 @@ const FormikDate = ({ placeholder, format, ...props }) => {
         disablePast
         autoOk
         disableToolbar
+        ampm={false}
         animateYearScrolling
         inputVariant="outlined"
         margin="dense"
