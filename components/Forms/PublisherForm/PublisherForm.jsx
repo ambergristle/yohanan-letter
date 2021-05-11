@@ -24,7 +24,7 @@ const makePost = () => ({
 
 const makeDate = () => {
   const date = nextSunday(new Date());
-  const time = { hours: 8, minutes: 0, seconds: 0 };
+  const time = { hours: 8, minutes: 0, seconds: 0, milliseconds: 0 };
   return set(date, time);
 };
 

@@ -1,21 +1,27 @@
+import { useField } from "formik";
+
 import { TextField, Chip } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 
-const TagField = ({ tagList, selected, handleTagChange }) => {
+const FormikAutocomplete = ({ placeholder, options, ...props }) => {
+  // field passes props required for form handling
+  const [field, meta, helpers] = useField(props);
+  const { value } = field;
+  const { setValue } = helpers;
+
   return (
     <Autocomplete
-      name="tags"
+      {...field}
       multiple
-      options={tagList}
+      options={options}
       getOptionLabel={({ name }) => name}
       filterSelectedOptions
-      value={selected}
-      onChange={handleTagChange}
+      onChange={(_, value) => setValue(value)}
       freeSolo
       renderInput={(params) => (
         <TextField
           {...params}
-          placeholder={!selected.length ? "Tags..." : " "}
+          placeholder={!value.length ? placeholder : ""}
           fullWidth
           variant="outlined"
           margin="dense"
@@ -33,4 +39,4 @@ const TagField = ({ tagList, selected, handleTagChange }) => {
   );
 };
 
-export default TagField;
+export default FormikAutocomplete;

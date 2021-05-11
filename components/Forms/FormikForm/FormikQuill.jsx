@@ -16,17 +16,14 @@ const FormikQuill = ({ placeholder, ...props }) => {
   const formats = ["bold", "italic", "underline"];
 
   return (
-    <>
-      <QuillWrapper
-        theme={null}
-        placeholder="Create a new post here!"
-        onChange={(content, delta, source, editor) =>
-          setValue(editor.getHTML())
-        }
-        modules={modules}
-        formats={formats}
-      />
-    </>
+    <QuillWrapper
+      {...field}
+      theme={null}
+      placeholder="Create a new post here!"
+      onChange={(content, delta, source, editor) => setValue(editor.getHTML())}
+      modules={modules}
+      formats={formats}
+    />
   );
 };
 

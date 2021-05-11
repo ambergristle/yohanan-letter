@@ -25,6 +25,7 @@ const FormikDate = ({ placeholder, format, ...props }) => {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <DateTimePicker
+        {...field}
         onChange={(value) => setValue(value)}
         placeholder={placeholder}
         disablePast
