@@ -2,8 +2,9 @@ import { useFormikContext } from "formik";
 
 import { Button } from "@material-ui/core";
 
-// button with form-wide error display
-const FormikButton = ({ type, label, startIcon, endIcon }) => {
+// map formik props to Button component
+// display form-wide errors; disable when invalid or submitting
+const FormikButton = ({ type, label, startIcon, endIcon, ...props }) => {
   const { isSubmitting, isValid, dirty, errors, values } = useFormikContext();
   const pending = !isValid || !dirty || isSubmitting; // disable form submission during login attempt
   const error = errors.action; // display form action error
@@ -11,6 +12,7 @@ const FormikButton = ({ type, label, startIcon, endIcon }) => {
   return (
     <>
       <Button
+        {...props}
         type={type}
         disabled={pending}
         variant="contained"

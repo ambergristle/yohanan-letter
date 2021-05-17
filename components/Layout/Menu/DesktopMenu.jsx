@@ -3,10 +3,12 @@ import { Box, Grid, makeStyles } from "@material-ui/core";
 import NavButton from "../Nav/NavButton";
 import Search from "./Search";
 
+// create standard-width space for tag list (filter options)
 const useStyles = makeStyles((theme) => ({
   tags: { flexGrow: 1 },
 }));
 
+// site navigation, search (regex), filter (posts with tag(s))
 const DesktopMenu = () => {
   const classes = useStyles();
   return (

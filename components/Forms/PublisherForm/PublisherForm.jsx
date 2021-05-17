@@ -1,7 +1,6 @@
-import { v4 as uuid } from "uuid";
-import { DateTime } from "luxon";
+import { useState } from "react";
 
-import { FieldArray } from "formik";
+import { makeSource, makePost, initialValues } from "./initialValues";
 
 import FormikForm from "../FormikForm/FormikForm";
 import FormikDate from "../FormikForm/FormikDate";
@@ -9,40 +8,26 @@ import FormikField from "../FormikForm/FormikField";
 import FormikArray from "../FormikForm/FormikArray";
 import FormikButton from "../FormikForm/FormikButton";
 
+import Controls from "./Controls/Controls";
 import PostItem from "./PostItem";
 
+import { v4 as uuid } from "uuid";
 import FormikValues from "../FormikForm/FormikValues";
 
-const makeSource = () => ({ title: "", href: "" });
+const tags = [
+  { id: uuid(), name: "first" },
+  { id: uuid(), name: "second" },
+  { id: uuid(), name: "third" },
+];
 
-const makePost = () => ({
-  title: "",
-  text: "",
-  sources: Array.from({ length: 2 }, () => makeSource()),
-  tags: [],
-});
-
-const makeDate = () => {
-  return DateTime.fromObject({
-    hour: 8,
-    minute: 0,
-    second: 0,
-    zone: "America/New_York",
-  }).set({ weekday: 7 });
-};
-
-const initialValues = {
-  date: makeDate(),
-  subject: "The Yohanan Letter - Legal News for Investors and Entrepreneurs",
-  intro: "",
-  posts: Array.from({ length: 3 }, () => makePost()),
-};
-
+// edit and schedule newsletter drafts
 const PublisherForm = () => {
+  const [tagOptions, setTagOptions] = useState(tags);
   const tryPublish = () => {};
 
   return (
     <FormikForm initialValues={initialValues} handleSubmit={tryPublish}>
+      <Controls />
       <FormikDate name="date" format="MMMM dd @ HH:mm ZZZZ" />
       <FormikField
         name="subject"
@@ -57,9 +42,8 @@ const PublisherForm = () => {
         rows={6}
       />
       <FormikArray name="posts">
-        <PostItem />
+        <PostItem tagOptions={tagOptions} setTagOptions={setTagOptions} />
       </FormikArray>
-      <FormikButton type="submit" label="save" />
       <FormikValues />
     </FormikForm>
   );

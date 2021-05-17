@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// filter displayed posts using regex
 export default function Search() {
   const classes = useStyles();
 

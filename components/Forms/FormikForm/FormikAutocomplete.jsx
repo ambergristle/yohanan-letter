@@ -1,18 +1,26 @@
 import { useField } from "formik";
+import { v4 as uuid } from "uuid";
 
 import { TextField, Chip } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 
-const FormikAutocomplete = ({ placeholder, options, ...props }) => {
+// map formik props to Autocomplete component
+// add uuids to new tags
+const FormikAutocomplete = ({ placeholder, options, setOptions, ...props }) => {
   // field passes props required for form handling
   const [field, meta, helpers] = useField(props);
   const selected = field.value.length;
   const { setValue } = helpers;
 
+  // handle adding new tags (freesolo)
+  // push new tags to options (share between fields)
   const handleChange = (_e, value) => {
     const last = value.slice(-1)[0];
-    if (!last.id) {
-      value[value.indexOf(last)] = { id: selected.length, name: last };
+    // if last item is new, add uuid and push to options
+    if (!last?.id) {
+      const newTag = { id: uuid(), name: last };
+      value[value.indexOf(last)] = newTag;
+      setOptions([newTag, ...options]);
     }
     setValue(value);
   };
@@ -22,7 +30,7 @@ const FormikAutocomplete = ({ placeholder, options, ...props }) => {
       {...field}
       multiple
       options={options}
-      getOptionLabel={({name}) => name}
+      getOptionLabel={({ name }) => name}
       filterSelectedOptions
       onChange={handleChange}
       freeSolo
@@ -40,7 +48,12 @@ const FormikAutocomplete = ({ placeholder, options, ...props }) => {
       )}
       renderTags={(value, getTagProps) =>
         value.map(({ id, name }, index) => (
-          <Chip name={id} label={name} size="small" {...getTagProps({ index })} />
+          <Chip
+            name={id}
+            label={name}
+            size="small"
+            {...getTagProps({ index })}
+          />
         ))
       }
     />
@@ -48,12 +61,3 @@ const FormikAutocomplete = ({ placeholder, options, ...props }) => {
 };
 
 export default FormikAutocomplete;
-
-// onKeyDown={(event) => {
-//   if (event.type === "keydown") {
-//     setValue({
-//       id: options.length,
-//       name: event.target.value,
-//     });
-//   }
-// }}

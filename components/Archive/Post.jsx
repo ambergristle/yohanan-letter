@@ -7,6 +7,7 @@ import SourceList from "./SourceList";
 import TagList from "./TagList";
 // import ReadMoreButton from "./ReadMoreButton";
 
+// truncate content & hide sources if preview (for feed)
 const Post = ({ preview, post: { topic, date, content, sources, tags } }) => {
   const dateString = format(new Date(date), "MMMM dd, yyyy");
 
@@ -29,7 +30,3 @@ const Post = ({ preview, post: { topic, date, content, sources, tags } }) => {
 };
 
 export default Post;
-
-// <TagList />
-// {!preview && <SourceList />}
-// {preview && <ReadMoreButton />}

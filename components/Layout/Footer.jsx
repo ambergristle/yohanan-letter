@@ -3,6 +3,7 @@ import { Grid, Typography, makeStyles } from "@material-ui/core";
 import NavButton from "./Nav/NavButton";
 import SocialButton from "./Nav/SocialButton";
 
+// fix footer at page bottom
 const useStyles = makeStyles((theme) => ({
   footer: {
     backgroundColor: "rgba(34, 34, 34, 1)",
@@ -11,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// high-level navigation, social media links, disclaimer
 const Footer = () => {
   const classes = useStyles();
 

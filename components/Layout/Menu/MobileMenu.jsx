@@ -15,15 +15,16 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Search from "./Search";
 import NavMenuItem from "../Nav/NavMenuItem";
 
+// site navigation, search (regex); popup mobile menu
 const MobileMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuAnchorRef = useRef(null);
   const menuWasOpen = useRef(menuOpen);
 
+  // toggle menu visibility
   const handleMenuOpen = () => {
     setMenuOpen((menuWasOpen) => !menuWasOpen);
   };
-
   const handleMenuClose = (event) => {
     if (menuAnchorRef.current && menuAnchorRef.current.contains(event.target)) {
       return;
@@ -31,6 +32,7 @@ const MobileMenu = () => {
     setMenuOpen(false);
   };
 
+  // track menu open state
   useEffect(() => {
     if (menuWasOpen.current === true && menuOpen === false) {
       menuAnchorRef.current.focus();

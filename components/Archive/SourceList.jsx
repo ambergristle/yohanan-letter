@@ -1,5 +1,6 @@
 import { Box, Typography, Link } from "@material-ui/core";
 
+// render list of sources for full posts
 const SourceList = ({ sources }) => {
   return (
     <Box>

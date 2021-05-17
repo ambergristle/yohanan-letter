@@ -5,6 +5,8 @@ import { Box, Container } from "@material-ui/core";
 import Header from "./Header";
 import Footer from "./Footer";
 
+// site template with custom html head
+// wrap content in header/footer
 const Layout = ({ children }) => {
   return (
     <>

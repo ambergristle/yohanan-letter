@@ -1,5 +1,6 @@
 import { Box, Chip } from "@material-ui/core";
 
+// render list of tags
 const TagList = ({ tags }) => {
   const filter = (tagId) => {
     console.log(tagId);

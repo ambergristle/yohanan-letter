@@ -20,6 +20,7 @@ const validationSchema = yup.object({
     .min(10, "Enter a valid password"),
 });
 
+// log in for auth access (admin, publishing)
 const LoginForm = () => {
   return (
     <FormikForm

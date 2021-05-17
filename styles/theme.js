@@ -1,12 +1,13 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
-// background: #222222 "rgba(34, 34, 34, 1)"
-// silver text: #eeeeee "rgba(238, 238, 238, 1)"
-// gold text: #fcdab7 "rgba(252, 218, 183, 1)"
-// blue text: #3282b8 "rgba(50, 130, 184, 1)"
+// dark gray: #222222 "rgba(34, 34, 34, 1)"
+// silver: #eeeeee "rgba(238, 238, 238, 1)"
+// gold: #fcdab7 "rgba(252, 218, 183, 1)"
+// blue: #3282b8 "rgba(50, 130, 184, 1)"
 // header text: Lucida Grande
 // body text: Helvetica
 
+// set or override material-ui defaults
 const theme = createMuiTheme({
   palette: {
     primary: {

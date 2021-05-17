@@ -4,6 +4,8 @@ import LogoButton from "./Nav/LogoButton";
 import MobileMenu from "./Menu/MobileMenu";
 import DesktopMenu from "./Menu/DesktopMenu";
 
+// adjust AppBar styling to accomodate logo, add responsiveness
+// switch to grid?
 const useStyles = makeStyles((theme) => ({
   appbar: {
     boxShadow: "none",
@@ -16,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: { justifyContent: "space-around" },
 }));
 
+// wrap desktop and mobile menus
 const Header = () => {
   const classes = useStyles();
 

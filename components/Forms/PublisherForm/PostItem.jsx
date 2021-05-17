@@ -1,16 +1,12 @@
 import FormikField from "../FormikForm/FormikField";
 import FormikQuill from "../FormikForm/FormikQuill";
 import FormikArray from "../FormikForm/FormikArray";
-import SourceItem from "./SourceItem";
 import FormikAutocomplete from "../FormikForm/FormikAutocomplete";
 
-const options = [
-  { id: 0, name: "first" },
-  { id: 1, name: "second" },
-  { id: 2, name: "third" },
-];
+import SourceItem from "./SourceItem";
 
-const PostItem = ({ name, fields }) => {
+// post fields as FormikArray item
+const PostItem = ({ name, fields, tagOptions, setTagOptions }) => {
   return (
     <>
       <FormikField
@@ -25,7 +21,8 @@ const PostItem = ({ name, fields }) => {
       <FormikAutocomplete
         name={`${name}.tags`}
         placeholder="Tags..."
-        options={options}
+        options={tagOptions}
+        setOptions={setTagOptions}
       />
     </>
   );

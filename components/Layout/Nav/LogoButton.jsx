@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// enable use of logo as link; handle centering
 const LogoButton = () => {
   const classes = useStyles();
 

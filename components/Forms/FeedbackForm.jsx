@@ -17,10 +17,12 @@ const validationSchema = yup.object({
   message: yup.string().required("Password is required"),
 });
 
+// post to sendgrid
 const sendFeedback = (values) => {
   console.log(values);
 };
 
+// post user feedback email
 const FeedbackForm = () => {
   return (
     <FormikForm

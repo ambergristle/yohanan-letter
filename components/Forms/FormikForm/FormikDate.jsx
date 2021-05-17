@@ -7,6 +7,7 @@ import LuxonUtils from "@date-io/luxon";
 import { InputAdornment } from "@material-ui/core";
 import EventIcon from "@material-ui/icons/Event";
 
+// map formik props to DateTimePicker component
 const FormikDate = ({ placeholder, format, ...props }) => {
   // field passes props required for form handling
   const [field, meta, helpers] = useField(props);
