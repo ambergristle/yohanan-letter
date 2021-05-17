@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-import { makeSource, makePost, initialValues } from "./initialValues";
+import {
+  makeSource,
+  makePost,
+  initialValues,
+} from "../../../lib/initialValues";
 
 import FormikForm from "../FormikForm/FormikForm";
 import FormikField from "../FormikForm/FormikField";
@@ -20,7 +24,7 @@ const tags = [
 ];
 
 // edit and schedule newsletter drafts
-const PublisherForm = () => {
+const PublisherForm = ({ draft }) => {
   const [tagOptions, setTagOptions] = useState(tags);
   const tryPublish = () => {};
 

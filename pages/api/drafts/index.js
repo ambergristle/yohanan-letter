@@ -1,25 +1,17 @@
 import prisma from "../prisma";
 import { authorize } from "../../../lib/auth/tokens";
 
-// fetch, update, schedule, or delete post
+// update, schedule, or delete post
 const drafts = async (req, res) => {
   if (!req.body) return res.sendStatus(400);
   const { draft } = req.body;
   const { id } = draft;
 
   // require id for changes to draft
-  if (req.method != "GET" && !id) return res.sendStatus(400);
+  if (!id) return res.sendStatus(400);
 
   try {
     switch (req.method) {
-      // get draft if any
-      case "GET":
-        const fetched = await prisma.letters.findUnique({
-          where: { draft: true },
-        });
-        if (!fetched) return res.sendStatus(404);
-        break;
-
       // update draft on save
       case "PATCH":
         const updated = await prisma.letters.upsert({
