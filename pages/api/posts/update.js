@@ -22,7 +22,7 @@ const update = async (req, res) => {
         });
         break;
 
-      // if neither patch nor delete, returnr error
+      // if neither patch nor delete, return error
       default:
         return res.sendStatus(405);
     }

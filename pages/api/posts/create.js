@@ -3,4 +3,4 @@ import { authorize } from "../../../lib/auth/tokens";
 
 const publish = async (req, res) => {};
 
-export default authorize(post, false);
+export default authorize(publish, false);

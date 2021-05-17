@@ -3,12 +3,11 @@ import { useState } from "react";
 import { makeSource, makePost, initialValues } from "./initialValues";
 
 import FormikForm from "../FormikForm/FormikForm";
-import FormikDate from "../FormikForm/FormikDate";
 import FormikField from "../FormikForm/FormikField";
 import FormikArray from "../FormikForm/FormikArray";
 import FormikButton from "../FormikForm/FormikButton";
 
-import Controls from "./Controls/Controls";
+import Controls from "./Controls";
 import PostItem from "./PostItem";
 
 import { v4 as uuid } from "uuid";
@@ -28,7 +27,6 @@ const PublisherForm = () => {
   return (
     <FormikForm initialValues={initialValues} handleSubmit={tryPublish}>
       <Controls />
-      <FormikDate name="date" format="MMMM dd @ HH:mm ZZZZ" />
       <FormikField
         name="subject"
         type="text"
