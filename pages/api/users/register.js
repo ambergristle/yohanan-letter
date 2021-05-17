@@ -21,7 +21,7 @@ const register = async (req, res) => {
     if (userExists) return res.sendStatus(403);
 
     // hash password and create user
-    const hash = await bcrypt(password, 10);
+    const hash = await bcrypt.hash(password, 10);
     await prisma.user.create({
       email: email,
       password: hash,

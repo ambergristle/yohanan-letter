@@ -28,6 +28,8 @@ const login = async (req, res) => {
   if (req.method !== "POST") return res.status(405).json(errors.request);
   if (!req.body) return res.status(400).json(errors.request);
 
+  console.log(await bcrypt.hash("pURA0g9sHFQ1MUdbDP3K", 10));
+
   const { email, password } = req.body;
 
   try {
@@ -41,8 +43,11 @@ const login = async (req, res) => {
     // if user not found
     if (!user) return res.status(404).json(errors.email);
 
+    // confirm password matches
+    const authenticated = await bcrypt.compare(password, user.password);
+
     // if user authenticated, generate tokens
-    if (bcrypt.compare(password, user.password)) {
+    if (authenticated) {
       const accessToken = generateToken(true, user);
       const refreshToken = generateToken(false, user);
 

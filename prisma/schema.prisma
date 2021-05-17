@@ -25,22 +25,25 @@ model Token {
   @@map(name: "tokens")
 }
 
-// model Letter {
-//   id    String
-//   date  DateTime
-//   intro String
-//   posts Post[]
-//   @@map(name: "drafts")
-// }
+model Letter {
+  id      String @id @db.Char(36)
+  date    DateTime
+  subject String
+  intro   String
+  posts   Post[]
+  @@map(name: "letters")
+}
 
 model Post {
-  id      String @id @db.Char(36)
-  slug    String @unique
-  date    DateTime
-  topic   String
-  content String
-  sources Source[]
-  tags    Tag[]
+  id       String @id @db.Char(36)
+  slug     String @unique
+  date     DateTime
+  topic    String
+  content  String
+  sources  Source[]
+  tags     Tag[]
+  letter   Letter @relation(fields: [letterId], references: [id])
+  letterId String @db.Char(36) @map("letter_id")
   @@map(name: "posts")
 }
 
