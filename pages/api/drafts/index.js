@@ -1,53 +1,50 @@
-import prisma from "../prisma";
+import prisma from "../../../lib/prisma/prisma";
 import { authorize } from "../../../lib/auth/tokens";
 import upsertDraft from "../../../lib/constructors/upsertDraft";
 
 // update, schedule, or delete post
 const drafts = async (req, res) => {
-  if (!req.body) return res.sendStatus(400);
+  if (!req.body) return res.status(400).end();
   const draft = req.body;
 
   // require id for changes to draft
-  if (!id) return res.sendStatus(400);
+  if (!draft.id) return res.status(400).end();
 
   try {
     switch (req.method) {
       // update draft on save
       case "PATCH":
-        const updated = await prisma.letters.upsert(upsertDraft(draft));
-        if (!updated) return res.sendStatus(500);
-        break;
+        const updated = await prisma.letter.upsert(upsertDraft(draft));
+        if (!updated) return res.status(500).end();
+        return res.status(201).end();
 
       // schedule letter, add draft to archive
       case "POST":
         const newLetter = { draft: false, ...draft };
-        const scheduled = await prisma.letters.upsert({
+        const scheduled = await prisma.letter.upsert({
           where: { id: id },
           update: newLetter,
           create: newLetter,
         });
-        if (!scheduled) return res.sendStatus(500);
-
+        if (!scheduled) return res.status(500);
         // // schedule
-        break;
+        return res.status(200).end();
 
       // delete draft
       case "DELETE":
-        const deleted = await prisma.letters.delete({
+        const deleted = await prisma.letter.delete({
           where: { id: id },
         });
-        if (!deleted) return res.sendStatus(500);
-        break;
+        if (!deleted) return res.status(500);
+        return res.status(204).end();
 
       // if none, return error
       default:
-        return res.sendStatus(405);
+        return res.status(405).end();
     }
-
-    return res.sendStatus(200);
   } catch (error) {
     console.log(error);
-    return res.sendStatus(500);
+    return res.status(500).end();
   } finally {
     await prisma.$disconnect();
   }

@@ -1,5 +1,8 @@
 import { useFormikContext } from "formik";
 
+import { initialValues } from "../../../lib/constructors/initialValues";
+import tryPublish from "../../../lib/publish/tryPublish";
+
 import { Box, makeStyles } from "@material-ui/core";
 
 import FormikButton from "../FormikForm/FormikButton";
@@ -21,21 +24,12 @@ const Controls = () => {
   const { date } = values;
 
   const handleClear = () => {
-    resetForm();
+    resetForm({ values: initialValues });
   };
-  const handleSave = () => {
-    console.log("save");
+
+  const handleSubmit = (event) => {
     setSubmitting(true);
-    values.posts.forEach((post) => {
-      post.date = date;
-    });
-    console.log(values);
-    setSubmitting(false);
-  };
-  const handleSchedule = () => {
-    console.log("schedule");
-    setSubmitting(true);
-    console.log(values);
+    tryPublish(values, event.target.innerText);
     setSubmitting(false);
   };
 
@@ -55,12 +49,12 @@ const Controls = () => {
         <FormikButton
           label="save"
           startIcon={<SaveIcon />}
-          onClick={handleSave}
+          onClick={handleSubmit}
         />
         <FormikButton
           label="schedule"
           startIcon={<ScheduleIcon />}
-          onClick={handleSchedule}
+          onClick={handleSubmit}
         />
       </Box>
       <FormikDate

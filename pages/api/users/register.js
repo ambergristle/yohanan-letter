@@ -4,8 +4,8 @@ import { authorize } from "../../../lib/auth/tokens";
 
 // register new user
 const register = async (req, res) => {
-  if (req.method !== "POST") return res.sendStatus(405);
-  if (!req.body) return res.sendStatus(400);
+  if (req.method !== "POST") return res.status(405);
+  if (!req.body) return res.status(400);
 
   const { email, password, role } = req.body;
 
@@ -18,7 +18,7 @@ const register = async (req, res) => {
     });
 
     // deny duplicate email creation
-    if (userExists) return res.sendStatus(403);
+    if (userExists) return res.status(403);
 
     // hash password and create user
     const hash = await bcrypt.hash(password, 10);
@@ -28,10 +28,10 @@ const register = async (req, res) => {
       role: role,
     });
 
-    res.sendStatus(201);
+    res.status(201);
   } catch (error) {
     console.log(error);
-    return res.sendStatus(500);
+    return res.status(500);
   } finally {
     await prisma.$disconnect();
   }

@@ -3,8 +3,8 @@ import { authorize } from "../../../lib/auth/tokens";
 
 // delete refresh token
 const logout = async (req, res) => {
-  if (req.method !== "POST") return res.sendStatus(405);
-  if (!req.body) return res.sendStatus(400);
+  if (req.method !== "POST") return res.status(405);
+  if (!req.body) return res.status(400);
 
   const { refreshToken } = req.body;
 
@@ -14,12 +14,12 @@ const logout = async (req, res) => {
       where: { id: refreshToken },
     });
 
-    return res.sendStatus(200);
+    return res.status(200);
   } catch (error) {
     console.log(error);
-    return res.sendStatus(500);
+    return res.status(500);
   } finally {
-    await prisma.$disconnect();
+    await prisma.status();
   }
 };
 

@@ -11,7 +11,7 @@ const FormikForm = ({
       initialValues={initialValues}
       validationSchema={validationSchema}
       validateOnChange
-      onSubmit={async (values, actions) => {
+      onSubmit={async (values, { setSubmitting, ...actions }) => {
         setSubmitting(true);
         handleSubmit(values, actions);
       }}
