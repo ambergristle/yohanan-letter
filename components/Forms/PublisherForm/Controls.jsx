@@ -1,3 +1,5 @@
+import { useFormikContext } from "formik";
+
 import { Box, makeStyles } from "@material-ui/core";
 
 import FormikButton from "../FormikForm/FormikButton";
@@ -15,14 +17,26 @@ const useStyles = makeStyles((theme) => ({
 // save, clear, or schedule newsletter
 const Controls = () => {
   const { controlBox, dateField } = useStyles();
+  const { values, resetForm, setSubmitting } = useFormikContext();
+  const { date } = values;
+
+  const handleClear = () => {
+    resetForm();
+  };
   const handleSave = () => {
     console.log("save");
-  };
-  const handleClear = () => {
-    console.log("clear");
+    setSubmitting(true);
+    values.posts.forEach((post) => {
+      post.date = date;
+    });
+    console.log(values);
+    setSubmitting(false);
   };
   const handleSchedule = () => {
     console.log("schedule");
+    setSubmitting(true);
+    console.log(values);
+    setSubmitting(false);
   };
 
   return (
@@ -34,14 +48,14 @@ const Controls = () => {
     >
       <Box display="flex">
         <FormikButton
-          label="save"
-          startIcon={<SaveIcon />}
-          onClick={handleSave}
-        />
-        <FormikButton
           label="clear"
           startIcon={<DeleteIcon />}
           onClick={handleClear}
+        />
+        <FormikButton
+          label="save"
+          startIcon={<SaveIcon />}
+          onClick={handleSave}
         />
         <FormikButton
           label="schedule"

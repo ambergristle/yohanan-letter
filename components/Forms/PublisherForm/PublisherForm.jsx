@@ -1,13 +1,11 @@
 import { useState } from "react";
+import * as yup from "yup";
 
-import {
-  makeSource,
-  makePost,
-  initialValues,
-} from "../../../lib/initialValues";
+import { makeSource, makePost } from "../../../lib/constructors/initialValues";
 
 import FormikForm from "../FormikForm/FormikForm";
 import FormikField from "../FormikForm/FormikField";
+import FormikQuill from "../FormikForm/FormikQuill";
 import FormikArray from "../FormikForm/FormikArray";
 import FormikButton from "../FormikForm/FormikButton";
 
@@ -23,25 +21,46 @@ const tags = [
   { id: uuid(), name: "third" },
 ];
 
+// input requirements; error messages disabled
+const validationSchema = yup.object({
+  subject: yup.string().required(""),
+  intro: yup
+    .string()
+    .matches(/(?!<p><br><\/p>)/)
+    .required(""),
+  posts: yup.array().of(
+    yup.object({
+      title: yup.string().required(""),
+      text: yup
+        .string()
+        .matches(/(?!<p><br><\/p>)/)
+        .required(""),
+      sources: yup.array().of(
+        yup.object({
+          title: yup.string().required(""),
+          href: yup.string().required(""),
+        })
+      ),
+    })
+  ),
+});
+
 // edit and schedule newsletter drafts
 const PublisherForm = ({ draft }) => {
   const [tagOptions, setTagOptions] = useState(tags);
-  const tryPublish = () => {};
 
   return (
-    <FormikForm initialValues={initialValues} handleSubmit={tryPublish}>
+    <FormikForm initialValues={draft} validationSchema={validationSchema}>
       <Controls />
       <FormikField
         name="subject"
         type="text"
         placeholder="The Yohanan Letter - Legal News for Investors and Entrepreneurs"
       />
-      <FormikField
+      <FormikQuill
         name="intro"
-        type="text"
         placeholder="This week I’m thinking about..."
-        multiline
-        rows={6}
+        className="intro"
       />
       <FormikArray name="posts">
         <PostItem tagOptions={tagOptions} setTagOptions={setTagOptions} />

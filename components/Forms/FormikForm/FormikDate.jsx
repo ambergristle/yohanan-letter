@@ -3,9 +3,12 @@ import { useField } from "formik";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { DateTimePicker } from "@material-ui/pickers";
 import LuxonUtils from "@date-io/luxon";
+import { Settings } from "luxon";
 
 import { InputAdornment } from "@material-ui/core";
 import EventIcon from "@material-ui/icons/Event";
+
+Settings.defaultZoneName = "America/New_York";
 
 // map formik props to DateTimePicker component
 const FormikDate = ({ placeholder, format, ...props }) => {
@@ -18,7 +21,7 @@ const FormikDate = ({ placeholder, format, ...props }) => {
       <DateTimePicker
         {...field}
         {...props}
-        onChange={(value) => setValue(value)}
+        onChange={(value) => setValue(value.toISO())}
         placeholder={placeholder}
         disablePast
         autoOk

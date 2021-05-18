@@ -12,7 +12,8 @@ const QuillWrapper = dynamic(() => import("react-quill"), {
 const FormikQuill = ({ placeholder, ...props }) => {
   // field passes props required for form handling
   const [field, meta, helpers] = useField(props);
-  const { setValue, onBlur } = helpers;
+  const { onChange } = field;
+  const { onBlur } = helpers;
 
   // wysiwyg settings; constain available formats
   const modules = { toolbar: false };
@@ -20,13 +21,15 @@ const FormikQuill = ({ placeholder, ...props }) => {
 
   return (
     <QuillWrapper
+      {...props}
       {...field}
-      theme={null}
-      placeholder="Create a new post here!"
-      onChange={(_c, _d, _s, editor) => setValue(editor.getHTML())}
+      {...helpers}
+      onChange={onChange(props.name)}
       onBlur={onBlur}
+      placeholder={placeholder}
       modules={modules}
       formats={formats}
+      theme={null}
     />
   );
 };

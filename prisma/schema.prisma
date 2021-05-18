@@ -27,6 +27,7 @@ model Token {
 
 model Letter {
   id      String @id @db.Char(36)
+  draft   Boolean
   date    DateTime
   subject String
   intro   String
@@ -36,10 +37,10 @@ model Letter {
 
 model Post {
   id       String @id @db.Char(36)
-  slug     String @unique
+  draft    Boolean
   date     DateTime
-  topic    String
-  content  String
+  title    String
+  text  String
   sources  Source[]
   tags     Tag[]
   letter   Letter @relation(fields: [letterId], references: [id])

@@ -1,11 +1,11 @@
 import prisma from "../prisma";
 import { authorize } from "../../../lib/auth/tokens";
+import upsertDraft from "../../../lib/constructors/upsertDraft";
 
 // update, schedule, or delete post
 const drafts = async (req, res) => {
   if (!req.body) return res.sendStatus(400);
-  const { draft } = req.body;
-  const { id } = draft;
+  const draft = req.body;
 
   // require id for changes to draft
   if (!id) return res.sendStatus(400);
@@ -14,11 +14,7 @@ const drafts = async (req, res) => {
     switch (req.method) {
       // update draft on save
       case "PATCH":
-        const updated = await prisma.letters.upsert({
-          where: { id: id },
-          update: { ...draft },
-          create: { draft: true, ...draft },
-        });
+        const updated = await prisma.letters.upsert(upsertDraft(draft));
         if (!updated) return res.sendStatus(500);
         break;
 

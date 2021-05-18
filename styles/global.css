@@ -12,6 +12,11 @@ strong {
   height: 25vh;
   margin-bottom: 4px;
 }
+
+.quill.intro {
+  height: 12vh;
+}
+
 .ql-editor {
   padding: 6px 15px 7px 15px;
   background-color: rgba(51, 51, 51, 1);

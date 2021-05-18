@@ -14,7 +14,10 @@ const PostItem = ({ name, fields, tagOptions, setTagOptions }) => {
         type="text"
         placeholder="Post Title"
       />
-      <FormikQuill name={`${name}.text`} />
+      <FormikQuill
+        name={`${name}.text`}
+        placeholder="Create a new post here!"
+      />
       <FormikArray name={`${name}.sources`}>
         <SourceItem />
       </FormikArray>

@@ -17,18 +17,18 @@ const Archived = ({ posts }) => {
   );
 };
 
-// get posts server-side
-export const getServerSideProps = async (context) => {
-  const { query } = context.query;
-
-  const slug = query.join("/");
-
-  // pass posts or null to component as props
-  const posts = (await getPosts(slug)) || null;
-
-  return {
-    props: { posts },
-  };
-};
+// // get posts server-side
+// export const getServerSideProps = async (context) => {
+//   const { query } = context.query;
+//
+//   const slug = query.join("/");
+//
+//   // pass posts or null to component as props
+//   const posts = (await getPosts(slug)) || null;
+//
+//   return {
+//     props: { posts },
+//   };
+// };
 
 export default Archived;
