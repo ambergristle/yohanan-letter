@@ -30,7 +30,7 @@ const register = async (req, res) => {
 
     res.status(201);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500);
   } finally {
     await prisma.$disconnect();

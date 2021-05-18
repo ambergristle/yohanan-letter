@@ -1,26 +1,20 @@
 import * as yup from "yup";
 
+import trySend from "../../lib/email/trySend";
+
 import SendIcon from "@material-ui/icons/Send";
 
 import FormikForm from "./FormikForm/FormikForm";
 import FormikField from "./FormikForm/FormikField";
 import FormikButton from "./FormikForm/FormikButton";
 
-const initialValues = { email: "", message: "" };
+const initialValues = { from: "", message: "" };
 
 // input requirements and error messages
 const validationSchema = yup.object({
-  email: yup
-    .string()
-    .required("Email is required")
-    .email("Enter a valid email"),
-  message: yup.string().required("Password is required"),
+  from: yup.string().required("Email is required").email("Enter a valid email"),
+  message: yup.string().required("Include a message"),
 });
-
-// post to sendgrid
-const sendFeedback = (values) => {
-  console.log(values);
-};
 
 // post user feedback email
 const FeedbackForm = () => {
@@ -28,9 +22,9 @@ const FeedbackForm = () => {
     <FormikForm
       initialValues={initialValues}
       validationSchema={validationSchema}
-      handleSubmit={sendFeedback}
+      handleSubmit={trySend}
     >
-      <FormikField name="email" type="email" placeholder="Email" />
+      <FormikField name="from" type="email" placeholder="Email" />
       <FormikField
         name="message"
         type="password"
@@ -38,7 +32,7 @@ const FeedbackForm = () => {
         multiline
         rows={6}
       />
-      <FormikButton label="send" endIcon={<SendIcon />} />
+      <FormikButton type="submit" label="send" endIcon={<SendIcon />} />
     </FormikForm>
   );
 };

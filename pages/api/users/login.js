@@ -28,8 +28,6 @@ const login = async (req, res) => {
   if (req.method !== "POST") return res.status(405).json(errors.request);
   if (!req.body) return res.status(400).json(errors.request);
 
-  console.log(await bcrypt.hash("pURA0g9sHFQ1MUdbDP3K", 10));
-
   const { email, password } = req.body;
 
   try {
@@ -66,7 +64,7 @@ const login = async (req, res) => {
     // password does not match
     return res.status(401).json(errors.password);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).json(errors.server);
   } finally {
     await prisma.$disconnect();

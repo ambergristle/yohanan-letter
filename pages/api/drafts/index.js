@@ -43,7 +43,7 @@ const drafts = async (req, res) => {
         return res.status(405).end();
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).end();
   } finally {
     await prisma.$disconnect();

@@ -16,7 +16,7 @@ const logout = async (req, res) => {
 
     return res.status(200);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500);
   } finally {
     await prisma.status();

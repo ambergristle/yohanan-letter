@@ -27,6 +27,7 @@ const refresh = async (req, res) => {
 
     res.status(200).json({ token: accessToken });
   } catch (error) {
+    console.error(error);
     res.status(500);
   } finally {
     await prisma.$disconnect();
