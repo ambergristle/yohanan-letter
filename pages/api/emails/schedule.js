@@ -7,7 +7,11 @@ const schedule = async (req, res) => {
   const letter = req.body;
   console.log(letter);
 
-  const request = { method: "POST", url: "/v3/marketing/singlesends" };
+  const request = {
+    method: "POST",
+    url: "/v3/marketing/singlesends",
+    body: data,
+  };
 
   try {
     console.log(letter);

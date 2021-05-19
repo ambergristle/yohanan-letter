@@ -8,8 +8,8 @@ const send = async (req, res) => {
   const message = req.body;
 
   try {
-    mail.send(message);
-    return res.status(200).end();
+    const response = mail.send(message);
+    return res.status(response.status).end();
   } catch (error) {
     if (error.response) {
       console.error(error.response.body);
