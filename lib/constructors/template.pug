@@ -1,25 +1,3 @@
-- var theme = "main"
-
-- var background = "rgba(34, 34, 34, 1)"
-
-- var fontPrimary = "'Helvetica', sans-serif"
-- var fontSecondary = "'Lucida Grande', sans-serif"
-
-- var colorPrimary = theme = "main" ? "rgba(238, 238, 238, 1)" : "rgba(20, 39, 78, 1)"
-- var colorSecondary = theme ="rgba(252, 218, 183, 1)"
-- var colorTertiary = "rgba(50, 130, 184, 1)"
-
-- var subscribeHref = "//cdn.forms-content.sg-form.com/b5a15d41-508c-11eb-b248-ea422c4fb1a2"
-
-- var date = "May 26, 2021"
-- var intro = "this is my intro"
-- var content = [{title: "title 1", content: "<p>hi</p>", sources: [{ title: "source 1", href: "href 1"}] },{title: "title 2", content: "<p>hi</p>", sources: [{ title: "source 2", href: "href 2"}]}]
-
-- var bio = "bio"
-- var appeal = "appeal"
-- var disclaimer = "disclaimer"
-
-
 html
   head
   body(style={"padding": "0px"})
@@ -29,23 +7,23 @@ html
         td(style={
           "width": "500px",
           "max-width": "500px",
-          "background": background,
+          "background": styles.background,
         })
           table(style={
               "width": "100%",
               "padding": "15px",
-              "font-family": fontPrimary,
+              "font-family": styles.fontPrimary,
               "font-size": "14px",
               "font-weight": "300",
               "text-align": "justify",
-              "color": colorPrimary
+              "color": styles.colorPrimary
             })
             tr: td(style={"padding": "15px"})
-            tr(style={"text-align": "center", "color": colorSecondary})
+            tr(style={"text-align": "center", "color": styles.colorSecondary})
               td
                 strong(style={
                   "font-size": "28px",
-                  "font-family": fontSecondary
+                  "font-family": styles.fontSecondary
                 }) The Yohanan Letter
                 br
                 span Legal News for Investors and Entrepreneurs
@@ -57,50 +35,50 @@ html
                 p(style={"text-align": "right"})
                   span New York City
                   br
-                  span #{date}
+                  span #{letter.date}
                 p(style={"text-align": "left"})
                   span Good morning,
-            tr: td !{intro}
+            tr: td !{letter.intro}
             tr: td(style={"padding": "15px"})      
-            each post in content
+            each post in letter.content
               tr: td
                 button(style={
                   "padding": "2px 6px",
                   "border": "none",
                   "border-radius": "2em",
-                  "background": colorSecondary,
+                  "background": styles.colorSecondary,
                   "font-size": "18px",
                   "font-weight": "700",
-                  "color": background
+                  "color": styles.background
                 }) #{post.title}
                 div !{post.content}
                 strong More knowledge:
                 each source in post.sources
                   p: a(
                     href=source.href
-                    style={"color": colorTertiary, "font-weight": "700"}
+                    style={"color": styles.colorTertiary, "font-weight": "700"}
                   ) #{source.title}
               tr: td(style={"padding": "15px"})
             tr: td(style={"padding": "20px"})
             tr
               td
-                p: em #{bio}
-                p: span #{appeal}
+                p: em #{text.bio}
+                p: span #{text.appeal}
             tr: td(style={"padding": "30px"})
             tr
               td(style={"text-align": "center"})
                 a(
-                  href=subscribeHref
+                  href="//cdn.forms-content.sg-form.com/b5a15d41-508c-11eb-b248-ea422c4fb1a2"
                   target="_blank"
                 ): button(style={
                   "padding": "10px 20px",
-                  "background-color": "rgba(252, 218, 183, 1)",
+                  "background-color": styles.colorSecondary,
                   "border-radius": "2em",
                   "border": "none",
                   "font-size": "18px",
-                  "font-family": fontSecondary,
+                  "font-family": styles.fontSecondary,
                   "font-weight": "700",
-                  "color": background,
+                  "color": styles.background,
                   "cursor": "pointer"
                 }) Subscribe
             tr: td(style={"padding": "30px"})
@@ -108,11 +86,11 @@ html
               "font-size": "10px",
               "line-height": "1",
               "color": "rgba(192, 39, 57, 1)"
-            }) #{disclaimer}
+            }) #{text.disclaimer}
         td
     table(style={"width": "100%"})
       tr(style={
-        "font-family": fontPrimary,
+        "font-family": styles.fontPrimary,
         "font-size": "10px"
       })
         td(style={"text-align": "center"})
