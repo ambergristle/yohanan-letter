@@ -1,4 +1,4 @@
-import tryRefresh from "../lib/requests/tryRefresh";
+import getToken from "../lib/queries/getToken";
 import getDraft from "../lib/queries/getDraft";
 
 import PublisherForm from "../components/Forms/PublisherForm/PublisherForm";
@@ -15,7 +15,7 @@ export const getServerSideProps = async ({ req }) => {
   if (!jid) return redirect;
 
   // check refreshA token and get access token if valid
-  const token = await tryRefresh(jid);
+  const token = await getToken(jid);
   if (!token) return redirect;
 
   // pass draft or null to component as prop

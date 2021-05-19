@@ -8,12 +8,12 @@ const feedback = async (req, res) => {
   const message = req.body;
 
   try {
-    const response = mail.send(message);
-    return res.status(response.status).end();
+    const [response] = await mail.send(message);
+    return res.status(response.statusCode).end();
   } catch (error) {
     if (error.response) {
       console.error(error.response.body);
-      return res.status(error.response.status).end();
+      return res.status(error.code).end();
     }
     console.error(error);
     return res.status(500).end();

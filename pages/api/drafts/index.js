@@ -1,6 +1,8 @@
 import prisma from "../../../lib/prisma/prisma";
 
 import { authorize } from "../../../lib/auth/tokens";
+import trySchedule from "../../../lib/requests/trySchedule";
+
 import upsertDraft from "../../../lib/constructors/upsertDraft";
 import newLetter from "../../../lib/constructors/newLetter";
 
@@ -28,11 +30,17 @@ const drafts = async (req, res) => {
         //   update: newLetter,
         //   create: newLetter,
         // });
-        console.log(draft);
-        const [dark, light] = newLetter(draft);
-        console.log(dark);
         // if (!scheduled) return res.status(500);
-        // tryScheedule
+
+        const singleSends = newLetter(draft);
+
+        const responses = await Promise.all(
+          singleSends.map(async (send) => await trySchedule(send))
+        );
+
+        const failed = responses.find((send) => send > 200);
+        if (failed) return res.status(failed).end();
+
         return res.status(200).end();
 
       // delete draft
