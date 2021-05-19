@@ -1,4 +1,4 @@
-import tryRefresh from "../lib/auth/tryRefresh";
+import tryRefresh from "../lib/requests/tryRefresh";
 import getDraft from "../lib/queries/getDraft";
 
 import PublisherForm from "../components/Forms/PublisherForm/PublisherForm";

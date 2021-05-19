@@ -40,7 +40,7 @@ html
                   span Good morning,
             tr: td !{letter.intro}
             tr: td(style={"padding": "15px"})      
-            each post in letter.content
+            each post in letter.posts
               tr: td
                 button(style={
                   "padding": "2px 6px",
@@ -51,7 +51,7 @@ html
                   "font-weight": "700",
                   "color": styles.background
                 }) #{post.title}
-                div !{post.content}
+                div !{post.text}
                 strong More knowledge:
                 each source in post.sources
                   p: a(

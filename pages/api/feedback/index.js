@@ -3,7 +3,7 @@ import mail from "@sendgrid/mail";
 mail.setApiKey(process.env.SENDGRID_SEND_API_KEY);
 
 // send feedback email via sendgrid
-const send = async (req, res) => {
+const feedback = async (req, res) => {
   if (!req.body) return res.status(400).end();
   const message = req.body;
 
@@ -20,4 +20,4 @@ const send = async (req, res) => {
   }
 };
 
-export default send;
+export default feedback;
