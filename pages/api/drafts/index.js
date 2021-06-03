@@ -24,29 +24,25 @@ const drafts = async (req, res) => {
 
       // schedule letter, add draft to archive
       case "POST":
-        // const newLetter = { draft: false, ...draft };
-        // const scheduled = await prisma.letter.upsert({
-        //   where: { id: id },
-        //   update: newLetter,
-        //   create: newLetter,
-        // });
-        // if (!scheduled) return res.status(500);
+        console.log(draft);
+        const archived = await prisma.letter.upsert(upsertDraft(draft, false));
+        if (!archived) return res.status(500);
 
-        const singleSends = newLetter(draft);
-
-        const responses = await Promise.all(
-          singleSends.map(async (send) => await trySchedule(send))
-        );
-
-        const failed = responses.find((send) => send > 200);
-        if (failed) return res.status(failed).end();
+        // const singleSends = newLetter(draft);
+        //
+        // const responses = await Promise.all(
+        //   singleSends.map(async (send) => await trySchedule(send))
+        // );
+        //
+        // const failed = responses.find((send) => send > 200);
+        // if (failed) return res.status(failed).end();
 
         return res.status(200).end();
 
       // delete draft
       case "DELETE":
         const deleted = await prisma.letter.delete({
-          where: { id: id },
+          where: { id: draft.id },
         });
         if (!deleted) return res.status(500);
         return res.status(204).end();
