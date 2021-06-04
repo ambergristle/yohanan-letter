@@ -1,5 +1,5 @@
-import getToken from "../lib/queries/getToken";
-import getDraft from "../lib/queries/getDraft";
+import getToken from "../utils/queries/getToken";
+import getDraft from "../utils/queries/getDraft";
 
 import PublisherForm from "../components/Forms/PublisherForm/PublisherForm";
 

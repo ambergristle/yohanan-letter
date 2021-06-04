@@ -4,7 +4,7 @@ import FormikForm from "./FormikForm/FormikForm";
 import FormikField from "./FormikForm/FormikField";
 import FormikButton from "./FormikForm/FormikButton";
 
-import tryLogin from "../../lib/requests/tryLogin";
+import tryLogin from "../../utils/requests/tryLogin";
 
 const initialValues = { email: "", password: "" };
 

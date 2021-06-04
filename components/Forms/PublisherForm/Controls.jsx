@@ -1,7 +1,7 @@
 import { useFormikContext } from "formik";
 
-import { initialValues } from "../../../lib/constructors/initialValues";
-import tryPublish from "../../../lib/requests/tryPublish";
+import { initialValues } from "../../../utils/constructors/initialValues";
+import tryPublish from "../../../utils/requests/tryPublish";
 
 import { Box, makeStyles } from "@material-ui/core";
 

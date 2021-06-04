@@ -1,10 +1,8 @@
 import { useField } from "formik";
-
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { DateTimePicker } from "@material-ui/pickers";
 import LuxonUtils from "@date-io/luxon";
 import { Settings } from "luxon";
-
 import { InputAdornment } from "@material-ui/core";
 import EventIcon from "@material-ui/icons/Event";
 

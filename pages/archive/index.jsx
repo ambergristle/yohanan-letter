@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import getPosts from "../../lib/queries/getPosts";
+import getPosts from "../../utils/queries/getPosts";
 
 import PostList from "../../components/Archive/PostList";
 

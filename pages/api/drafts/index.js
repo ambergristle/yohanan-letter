@@ -1,10 +1,10 @@
-import prisma from "../../../lib/prisma/prisma";
+import prisma from "../../../utils/prisma/prisma";
 
-import { authorize } from "../../../lib/auth/tokens";
-import trySchedule from "../../../lib/requests/trySchedule";
+import { authorize } from "../../../utils/auth/tokens";
+import trySchedule from "../../../utils/requests/trySchedule";
 
-import upsertDraft from "../../../lib/constructors/upsertDraft";
-import newLetter from "../../../lib/constructors/newLetter";
+import upsertDraft from "../../../utils/constructors/upsertDraft";
+import newLetter from "../../../utils/constructors/newLetter";
 
 // update, schedule, or delete post
 const drafts = async (req, res) => {

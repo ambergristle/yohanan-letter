@@ -1,5 +1,5 @@
 import prisma from "../prisma";
-import { authorize } from "../../../lib/auth/tokens";
+import { authorize } from "../../../utils/auth/tokens";
 
 // delete refresh token
 const logout = async (req, res) => {

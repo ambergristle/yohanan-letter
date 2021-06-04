@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-import trySend from "../../lib/requests/trySend";
+import trySend from "../../utils/requests/trySend";
 
 import SendIcon from "@material-ui/icons/Send";
 

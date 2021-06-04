@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import prisma from "../prisma";
-import { authorize } from "../../../lib/auth/tokens";
+import { authorize } from "../../../utils/auth/tokens";
 
 // register new user
 const register = async (req, res) => {

@@ -12,6 +12,7 @@ const getPosts = async (slug) => {
         tags: true,
       },
     });
+
     if (!response) return false;
     return JSON.stringify(response);
   } catch (error) {

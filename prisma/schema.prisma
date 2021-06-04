@@ -27,16 +27,19 @@ model Token {
 
 model Letter {
   id      String @id @db.Char(36)
+  slug    String
   draft   Boolean
   date    DateTime
   subject String
   intro   String
   posts   Post[]
+  outro   String
   @@map(name: "letters")
 }
 
 model Post {
   id       String @id @db.Char(36)
+  slug     String
   draft    Boolean
   date     DateTime
   title    String

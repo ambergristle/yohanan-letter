@@ -1,5 +1,5 @@
 import prisma from "../prisma";
-import { refreshAccessToken } from "../../../lib/auth/tokens";
+import { refreshAccessToken } from "../../../utils/auth/tokens";
 
 // refresh token if valid
 const refresh = async (req, res) => {

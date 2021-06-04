@@ -1,6 +1,5 @@
 import parse from "html-react-parser";
 import { format } from "date-fns";
-
 import { Box, Typography } from "@material-ui/core";
 
 import SourceList from "./SourceList";

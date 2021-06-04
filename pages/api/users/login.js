@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
-import prisma from "../../../lib/prisma/prisma";
-import { generateToken } from "../../../lib/auth/tokens";
-import { setCookie } from "../../../lib/auth/cookies";
+import prisma from "../../../utils/prisma/prisma";
+import { generateToken } from "../../../utils/auth/tokens";
+import { setCookie } from "../../../utils/auth/cookies";
 
 // error fields and messages for formik handling
 const errors = {
