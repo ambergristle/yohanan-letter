@@ -3,15 +3,16 @@ import { authorize } from "../../../utils/auth/tokens";
 
 // delete refresh token
 const logout = async (req, res) => {
-  if (req.method !== "POST") return res.status(405);
-  if (!req.body) return res.status(400);
+  if (req.method !== "DELETE") return res.status(405);
 
-  const { refreshToken } = req.body;
+  const jid = req.cookies.jid;
+  // return error if no refresh token (cookie)
+  if (!jid) return res.status(400);
 
   try {
     // delete refresh token
     await prisma.token.delete({
-      where: { id: refreshToken },
+      where: { id: jid },
     });
 
     return res.status(200);
