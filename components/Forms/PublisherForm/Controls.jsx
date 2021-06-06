@@ -15,11 +15,12 @@ import ScheduleIcon from "@material-ui/icons/Schedule";
 const useStyles = makeStyles((theme) => ({
   controlBox: { margin: "4px 0px" },
   dateField: { marginBottom: 0 },
+  scheduleButton: { backgroundColor: "rgba(50, 130, 184, 1)" },
 }));
 
 // save, clear, or schedule newsletter
 const Controls = () => {
-  const { controlBox, dateField } = useStyles();
+  const { controlBox, dateField, scheduleButton } = useStyles();
   const { values, resetForm, setSubmitting } = useFormikContext();
   const { date } = values;
 
@@ -43,16 +44,19 @@ const Controls = () => {
       <Box display="flex">
         <FormikButton
           label="clear"
+          color="primary"
           startIcon={<DeleteIcon />}
           onClick={handleClear}
         />
         <FormikButton
           label="save"
+          color="primary"
           startIcon={<SaveIcon />}
           onClick={handleSubmit}
         />
         <FormikButton
           label="schedule"
+          color="primary"
           startIcon={<ScheduleIcon />}
           onClick={handleSubmit}
         />

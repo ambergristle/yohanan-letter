@@ -1,4 +1,6 @@
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import { Box, Paper, makeStyles } from "@material-ui/core";
+
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 
 import { makePost } from "../../../utils/constructors/initialValues";
@@ -13,15 +15,34 @@ import SourceItem from "./SourceItem";
 
 import { useField } from "formik";
 
+const useStyles = makeStyles((theme) => ({
+  postItem: {
+    position: "relative",
+    marginBottom: "4px",
+    "&:hover": {
+      borderColor: "rgba(70, 70, 70, 1)",
+    },
+  },
+  delButton: {
+    position: "absolute",
+    top: "50%",
+    bottom: "50%",
+    left: "-4%",
+  },
+}));
+
 // post fields as FormikArray item
 const PostItem = ({
   index,
   name,
+  only,
+  last,
   tagOptions,
   setTagOptions,
   handleAdd,
   handleDel,
 }) => {
+  const { postItem, delButton } = useStyles();
   const [field, meta, helpers] = useField(name);
 
   const addPost = () => {
@@ -34,28 +55,42 @@ const PostItem = ({
   };
 
   return (
-    <>
-      <FormikField
-        name={`${name}.title`}
-        type="text"
-        placeholder="Post Title"
-      />
-      <FormikQuill
-        name={`${name}.text`}
-        placeholder="Create a new post here!"
-      />
-      <FormikArray name={`${name}.sources`}>
-        <SourceItem />
-      </FormikArray>
-      <FormikAutocomplete
-        name={`${name}.tags`}
-        placeholder="Tags..."
-        options={tagOptions}
-        setOptions={setTagOptions}
-      />
-      <FormikIconButton icon={<AddCircleOutlineIcon />} handleClick={addPost} />
-      <FormikIconButton icon={<RemoveCircleIcon />} handleClick={delPost} />
-    </>
+    <Box display="flex" flexDirection="column">
+      <Paper className={postItem} variant="outlined" elevation={0}>
+        <FormikField
+          name={`${name}.title`}
+          type="text"
+          placeholder="Post Title"
+        />
+        <FormikQuill
+          name={`${name}.text`}
+          placeholder="Create a new post here!"
+        />
+        <FormikArray name={`${name}.sources`}>
+          <SourceItem />
+        </FormikArray>
+        <FormikAutocomplete
+          name={`${name}.tags`}
+          placeholder="Tags..."
+          options={tagOptions}
+          setOptions={setTagOptions}
+        />
+        <FormikIconButton
+          disabled={only}
+          color="primary"
+          className={delButton}
+          icon={<RemoveCircleIcon />}
+          handleClick={delPost}
+        />
+      </Paper>
+      {last && (
+        <FormikIconButton
+          color="primary"
+          icon={<AddCircleIcon fontSize={"large"} />}
+          handleClick={addPost}
+        />
+      )}
+    </Box>
   );
 };
 

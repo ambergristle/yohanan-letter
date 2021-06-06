@@ -39,6 +39,12 @@ const theme = createMuiTheme({
         },
       },
     },
+    MuiPaper: {
+      outlined: {
+        padding: "10px",
+        border: "2px solid rgba(51, 51, 51, 1)",
+      },
+    },
     MuiFormControl: {
       marginDense: { marginTop: 0 },
     },

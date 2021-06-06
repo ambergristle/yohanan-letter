@@ -1,7 +1,7 @@
 body {
   height: 100vh;
   margin: 0;
-  background-color: rgba(34, 34, 34, 0.5);
+  background-color: rgba(34, 34, 34, 1);
 }
 
 strong {
@@ -15,6 +15,10 @@ strong {
 
 .quill.intro {
   height: 12vh;
+}
+
+.quill.outro {
+  height: 10vh;
 }
 
 .ql-editor {

@@ -26,7 +26,7 @@ const tags = [
 
 // input requirements; error messages disabled
 const validationSchema = yup.object({
-  subject: yup.string().required(""),
+  subject: yup.string().max(100).required(""),
   intro: yup
     .string()
     .matches(/(?!<p><br><\/p>)/)
@@ -46,6 +46,7 @@ const validationSchema = yup.object({
       ),
     })
   ),
+  outro: yup.string(),
 });
 
 // edit and schedule newsletter drafts
@@ -68,6 +69,11 @@ const PublisherForm = ({ draft }) => {
       <FormikArray name="posts">
         <PostItem tagOptions={tagOptions} setTagOptions={setTagOptions} />
       </FormikArray>
+      <FormikQuill
+        name="outro"
+        placeholder="Next week I’ll be talking about..."
+        className="outro"
+      />
       <FormikValues />
     </FormikForm>
   );

@@ -33,6 +33,7 @@ const makeDraft = () => {
     subject: "The Yohanan Letter - Legal News for Investors and Entrepreneurs",
     intro: "",
     posts: Array.from({ length: 1 }, () => makePost(date)),
+    outro: "",
   };
 };
 

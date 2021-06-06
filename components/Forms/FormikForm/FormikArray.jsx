@@ -6,10 +6,12 @@ const FormikArray = ({ children, name }) => {
   const child = Children.only(children);
 
   // array item template
-  const fieldItem = (index, push, remove) =>
+  const fieldItem = (index, only, last, push, remove) =>
     cloneElement(child, {
       key: index,
       name: `${name}[${index}]`,
+      only: only,
+      last: last,
       handleAdd: (newField) => push(newField),
       handleDel: (index) => remove(index),
     });
@@ -17,11 +19,16 @@ const FormikArray = ({ children, name }) => {
   return (
     <FieldArray
       name={name}
-      render={({ push, remove, form }) =>
-        getIn(form.values, name).map((field, index) =>
-          fieldItem(index, push, remove)
-        )
-      }
+      render={({ push, remove, form }) => {
+        const values = getIn(form.values, name);
+
+        return values.map((field, index) => {
+          const only = values.length === 1;
+          const last = index === values.length - 1;
+
+          return fieldItem(index, only, last, push, remove);
+        });
+      }}
     />
   );
 };
