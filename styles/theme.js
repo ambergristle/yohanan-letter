@@ -43,6 +43,9 @@ const theme = createMuiTheme({
       outlined: {
         padding: "10px",
         border: "2px solid rgba(51, 51, 51, 1)",
+        "&:hover": {
+          borderColor: "rgba(70, 70, 70, 1)",
+        },
       },
     },
     MuiFormControl: {

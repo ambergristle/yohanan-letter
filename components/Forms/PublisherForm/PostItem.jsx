@@ -19,9 +19,6 @@ const useStyles = makeStyles((theme) => ({
   postItem: {
     position: "relative",
     marginBottom: "4px",
-    "&:hover": {
-      borderColor: "rgba(70, 70, 70, 1)",
-    },
   },
   delButton: {
     position: "absolute",

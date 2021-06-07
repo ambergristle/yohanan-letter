@@ -9,6 +9,8 @@ import {
 
 import SearchIcon from "@material-ui/icons/Search";
 
+import { useStore } from "../../../utils/store/store";
+
 const useStyles = makeStyles((theme) => ({
   searchField: {
     marginLeft: theme.spacing(2),
@@ -17,22 +19,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // filter displayed posts using regex
-export default function Search() {
+const Search = () => {
   const classes = useStyles();
 
-  const [values, setValues] = useState({
-    searchTerm: "",
-  });
+  const searchTerm = useStore((state) => state.search);
+  const setSearch = useStore((state) => state.setSearch);
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
   };
 
   return (
     <TextField
       placeholder="Search…"
-      value={values.searchTerm}
-      onChange={handleChange("searchTerm")}
+      value={searchTerm}
+      onChange={handleSearch}
       variant="outlined"
       margin="dense"
       InputProps={{
@@ -46,4 +47,6 @@ export default function Search() {
       className={classes.searchField}
     />
   );
-}
+};
+
+export default Search;

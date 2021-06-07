@@ -22,7 +22,7 @@ const Bio = () => {
         direction="column"
         justify="space-around"
       >
-        <Typography color="textPrimary">
+        <Typography variant="h6" color="textPrimary" align="justify">
           Adam Yohanan is a corporate finance lawyer at an international law
           firm based in New York. Adam represents borrowers and lenders in a
           variety of transactions, with an emphasis on leveraged and acquisition

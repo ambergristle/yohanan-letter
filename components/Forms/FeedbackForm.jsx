@@ -2,6 +2,8 @@ import * as yup from "yup";
 
 import trySend from "../../utils/requests/trySend";
 
+import { Paper } from "@material-ui/core";
+
 import SendIcon from "@material-ui/icons/Send";
 
 import FormikForm from "./FormikForm/FormikForm";
@@ -24,15 +26,17 @@ const FeedbackForm = () => {
       validationSchema={validationSchema}
       handleSubmit={trySend}
     >
-      <FormikField name="from" type="email" placeholder="Email" />
-      <FormikField
-        name="message"
-        type="password"
-        placeholder="Let me know what you think!"
-        multiline
-        rows={6}
-      />
-      <FormikButton type="submit" label="send" endIcon={<SendIcon />} />
+      <Paper variant="outlined" elevation={0}>
+        <FormikField name="from" type="email" placeholder="Email" />
+        <FormikField
+          name="message"
+          type="password"
+          placeholder="Let me know what you think!"
+          multiline
+          rows={6}
+        />
+        <FormikButton type="submit" label="send" endIcon={<SendIcon />} />
+      </Paper>
     </FormikForm>
   );
 };

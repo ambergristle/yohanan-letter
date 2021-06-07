@@ -5,6 +5,8 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import Layout from "../components/Layout/Layout";
 import theme from "../styles/theme";
 
+import { Provider, useHydrate } from "../utils/store/store";
+
 import "../styles/global.css";
 import "react-quill/dist/quill.snow.css";
 
@@ -18,20 +20,17 @@ const App = ({ Component, pageProps }) => {
     }
   }, []);
 
+  const store = useHydrate(pageProps.initialZustandState);
+
   return (
     <ThemeProvider theme={theme}>
-      <Layout>
-        <Component {...pageProps} />
-        <div>{}</div>
-      </Layout>
+      <Provider initialStore={store}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </Provider>
     </ThemeProvider>
   );
-};
-
-export const getServerSideProps = async ({ req }) => {
-  const jid = req.cookies.jid;
-  console.log("jid", jid);
-  return { props: { jid } };
 };
 
 export default App;
