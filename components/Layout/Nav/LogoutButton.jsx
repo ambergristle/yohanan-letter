@@ -11,6 +11,7 @@ const LogoutButton = (props) => {
       onClick={tryLogout}
       variant="contained"
       color="primary"
+      size="medium"
       disableElevation
       endIcon={<ExitToAppIcon />}
     >

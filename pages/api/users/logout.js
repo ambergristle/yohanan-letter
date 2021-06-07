@@ -1,24 +1,20 @@
-import prisma from "../prisma";
+import prisma from "../../../utils/prisma/prisma";
 import { authorize } from "../../../utils/auth/tokens";
 
 // delete refresh token
-const logout = async (req, res) => {
-  if (req.method !== "DELETE") return res.status(405);
-
-  const jid = req.cookies.jid;
-  // return error if no refresh token (cookie)
-  if (!jid) return res.status(400);
+const logout = async (req, res, refreshToken) => {
+  if (req.method !== "DELETE") return res.status(405).end();
 
   try {
     // delete refresh token
-    await prisma.token.delete({
-      where: { id: jid },
+    const deleted = await prisma.token.delete({
+      where: { token: refreshToken },
     });
-
-    return res.status(200);
+    console.log(deleted);
+    return res.status(200).end();
   } catch (error) {
     console.error(error);
-    return res.status(500);
+    return res.status(500).end();
   } finally {
     await prisma.status();
   }

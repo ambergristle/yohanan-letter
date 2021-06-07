@@ -30,7 +30,7 @@ const LoginForm = () => {
     >
       <FormikField name="email" type="email" placeholder="Email" />
       <FormikField name="password" type="password" placeholder="Password" />
-      <FormikButton type="submit" label="log in" />
+      <FormikButton type="submit" label="log in" color="primary" />
     </FormikForm>
   );
 };

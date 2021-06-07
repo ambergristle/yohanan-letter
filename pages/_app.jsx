@@ -22,9 +22,16 @@ const App = ({ Component, pageProps }) => {
     <ThemeProvider theme={theme}>
       <Layout>
         <Component {...pageProps} />
+        <div>{}</div>
       </Layout>
     </ThemeProvider>
   );
+};
+
+export const getServerSideProps = async ({ req }) => {
+  const jid = req.cookies.jid;
+  console.log("jid", jid);
+  return { props: { jid } };
 };
 
 export default App;

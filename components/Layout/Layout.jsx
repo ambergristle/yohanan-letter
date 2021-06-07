@@ -1,13 +1,21 @@
 import Head from "next/head";
 
-import { Box, Container } from "@material-ui/core";
+import { Box, Container, makeStyles } from "@material-ui/core";
 
 import Header from "./Header";
 import Footer from "./Footer";
 
+const useStyles = makeStyles((theme) => ({
+  main: {
+    flexGrow: 1,
+  },
+}));
+
 // site template with custom html head
 // wrap content in header/footer
 const Layout = ({ children }) => {
+  const { main } = useStyles();
+
   return (
     <>
       <Head>
@@ -16,9 +24,12 @@ const Layout = ({ children }) => {
         <title>Yohanan Letter</title>
         <meta name="keywords" content="adam yohanan, law, finance" />
       </Head>
-      <Box minHeight="100vh">
+      <Box minHeight="100vh" display="flex" flexDirection="column">
         <Header />
-        <Container maxWidth="lg">{children}</Container>
+        <Container maxWidth="lg" className={main}>
+          {children}
+        </Container>
+        <Footer />
       </Box>
     </>
   );

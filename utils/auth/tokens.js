@@ -30,14 +30,14 @@ export const refreshAccessToken = (refreshToken) => {
 // authorization middleware, wraps request handlers
 export const authorize = (handler, adminRequired) => {
   return async (req, res) => {
-    // parse access token
-    const accessToken = req.cookies.jid;
+    // parse refresh token
+    const refreshToken = req.cookies.jid;
 
     // if token missing, return error
-    if (!accessToken) return res.status(401).json({});
+    if (!refreshToken) return res.status(401).json({});
 
     // verify token
-    await jwt.verify(accessToken, ACCESS_TOKEN_SECRET, (err, user) => {
+    await jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, (err, user) => {
       // if token invalid, return error
       if (err) return res.status(403).end();
 
@@ -47,7 +47,7 @@ export const authorize = (handler, adminRequired) => {
         return res.status(401).end();
       }
 
-      return handler(req, res);
+      return handler(req, res, refreshToken);
     });
   };
 };
