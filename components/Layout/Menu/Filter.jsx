@@ -13,8 +13,6 @@ const Filter = () => {
 
   const tags = useStore((state) => state.tags);
 
-  console.log("tags", tags);
-
   return (
     <Box
       width="50%"

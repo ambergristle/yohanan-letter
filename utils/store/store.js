@@ -3,8 +3,6 @@ import create from "zustand";
 import createContext from "zustand/context";
 import { persist } from "zustand/middleware";
 
-// import tryGetTags from "../requests/tryGetTags";
-
 // declare global store
 let store;
 
@@ -70,9 +68,8 @@ export const initializeStore = (preloadedState = {}) =>
 export const useHydrate = (initialState) => {
   const _store = store ?? initializeStore(initialState);
 
-  // use new store for ssr
+  // use new store for ssr, reuse store for csr
   if (typeof window !== "undefined") {
-    // reuse store for csr
     if (!store) store = _store;
 
     // if initialState changes, merge states, keeping client/server in sync
