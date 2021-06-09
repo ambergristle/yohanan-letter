@@ -15,13 +15,16 @@ const FormikAutocomplete = ({ placeholder, options, setOptions, ...props }) => {
   // push new tags to options (share between fields)
   const handleChange = (_e, value) => {
     const last = value.slice(-1)[0];
+
     // if last item is new, add uuid and push to options
-    if (!last?.id) {
+    if (last && !last.id) {
       const newTag = { id: uuid(), name: last };
       value[value.indexOf(last)] = newTag;
       setOptions([newTag, ...options]);
     }
-    setValue(value);
+
+    // if all tags removed, set to empty array
+    setValue(value || []);
   };
 
   return (

@@ -1,3 +1,4 @@
+import Router from "next/router";
 import axios from "axios";
 
 // axios request with login details; triggers form error if invalid
@@ -9,7 +10,8 @@ const tryLogin = async ({ email, password }, { setFieldError }) => {
       password,
     });
 
-    return true;
+    // redirect
+    return Router.push("/publish");
   } catch (error) {
     if (error.response) {
       const { field, helperText } = error.response.data;

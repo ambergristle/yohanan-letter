@@ -1,5 +1,13 @@
 // prisma "create" queries do not support nested update queries (@2.21.2)
 
+// convert date, title to slug (yyyy/mm/dd/post-title)
+// letter slug is yyyy/mm/dd
+const toSlug = (date, title) => {
+  date = date.slice(0, 10).replace(/-/g, "/");
+  title = "/" + title.toLowerCase().replace(/\W/g, "").replace(/ /g, "-");
+  return `${date}${title}`;
+};
+
 // create list of sources (for post.create query)
 const createSources = (sources) => ({
   create: sources.map((source) => source),
@@ -26,6 +34,7 @@ const connectOrCreateTags = (tags) => ({
 // create list of posts (for draft.create and draft.upsert)
 const createPosts = (posts) => ({
   create: posts.map(({ sources, tags, ...post }) => ({
+    slug: toSlug(post.date, post.title),
     draft: true,
     sources: createSources(sources),
     tags: connectOrCreateTags(tags),
@@ -39,6 +48,7 @@ const upsertPosts = (posts, publish) => ({
     where: { id: id },
     create: {
       id: id,
+      slug: toSlug(post.date, post.title),
       draft: true,
       sources: createSources(sources),
       tags: connectOrCreateTags(tags),
@@ -46,6 +56,7 @@ const upsertPosts = (posts, publish) => ({
     },
     update: {
       draft: !publish,
+      slug: toSlug(post.date, post.title),
       sources: upsertSources(sources),
       tags: connectOrCreateTags(tags),
       ...post,
@@ -58,11 +69,13 @@ const upsertDraft = ({ id, posts, ...draft }, publish) => ({
   where: { id: id },
   create: {
     id: id,
+    slug: toSlug(draft.date, ""),
     draft: true,
     posts: createPosts(posts),
     ...draft,
   },
   update: {
+    slug: toSlug(draft.date, ""),
     draft: !publish,
     posts: upsertPosts(posts, publish),
     ...draft,
