@@ -53,7 +53,7 @@ const PostItem = ({
 
   return (
     <Box display="flex" flexDirection="column">
-      <Paper className={postItem} variant="outlined" elevation={0}>
+      <Paper className={postItem} variant="outlined">
         <FormikField
           name={`${name}.title`}
           type="text"

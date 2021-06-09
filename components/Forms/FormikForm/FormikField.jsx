@@ -11,10 +11,11 @@ const FormikField = ({ type, placeholder, multiline, rows, ...props }) => {
   return (
     <TextField
       {...field}
+      {...props}
       type={type}
       placeholder={placeholder}
       error={!!errorText}
-      helperText={errorText}
+      label={errorText}
       multiline={multiline}
       rows={rows}
       fullWidth

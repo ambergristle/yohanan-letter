@@ -1,5 +1,4 @@
 import client from "@sendgrid/client";
-import axios from "axios";
 
 client.setApiKey(process.env.SENDGRID_SCHEDULE_API_KEY);
 

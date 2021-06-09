@@ -1,10 +1,11 @@
 import getToken from "../utils/queries/getToken";
 import getDraft from "../utils/queries/getDraft";
+import getTags from "../utils/queries/getTags";
 
 import PublisherForm from "../components/Forms/PublisherForm/PublisherForm";
 
-const Publish = ({ draft }) => {
-  return <PublisherForm draft={JSON.parse(draft)} />;
+const Publish = ({ draft, tags }) => {
+  return <PublisherForm draft={JSON.parse(draft)} tags={tags} />;
 };
 
 // check token and get draft server-side
@@ -20,9 +21,10 @@ export const getServerSideProps = async ({ req }) => {
 
   // pass draft or null to component as prop
   const draft = await getDraft();
+  const tags = await getTags();
 
   return {
-    props: { draft },
+    props: { draft, tags },
   };
 };
 

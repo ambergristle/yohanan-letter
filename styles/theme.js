@@ -76,6 +76,10 @@ const theme = createMuiTheme({
           backgroundColor: "rgba(252, 218, 183, 0.5)",
           color: "rgba(34, 34, 34, 1)",
         },
+        "&:disabled": {
+          backgroundColor: "rgba(252, 218, 183, 0.5)",
+          color: "rgba(34, 34, 34, 1)",
+        },
       },
     },
     MuiIconButton: {

@@ -1,8 +1,4 @@
-import Router from "next/router";
-import Cookies from "universal-cookie";
 import axios from "axios";
-
-const cookies = new Cookies();
 
 // axios request with login details; triggers form error if invalid
 // args passed from formik
@@ -13,9 +9,7 @@ const tryLogin = async ({ email, password }, { setFieldError }) => {
       password,
     });
 
-    // redirect
-    cookies.set("lia", true, { path: "/" });
-    return Router.push("/publish");
+    return true;
   } catch (error) {
     if (error.response) {
       const { field, helperText } = error.response.data;

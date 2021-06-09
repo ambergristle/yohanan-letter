@@ -24,12 +24,10 @@ class Document extends NextDocument {
   }
 }
 
-export default Document;
-
 // set resolution order to avoid ssg style conflicts
 Document.getInitialProps = async (ctx) => {
   const sheets = new ServerStyleSheets();
-  const originalRenderPage = ctx.renderPage;
+  const originalRenderPage = ctx.renderPage; // store reference to original
 
   ctx.renderPage = () =>
     originalRenderPage({
@@ -46,3 +44,5 @@ Document.getInitialProps = async (ctx) => {
     ],
   };
 };
+
+export default Document;

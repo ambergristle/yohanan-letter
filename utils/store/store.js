@@ -1,7 +1,9 @@
+import dynamic from "next/dynamic";
+
 import { useLayoutEffect } from "react";
 import create from "zustand";
 import createContext from "zustand/context";
-import { persist } from "zustand/middleware";
+import { persist, devtools } from "zustand/middleware";
 
 // declare global store
 let store;
@@ -24,43 +26,41 @@ export const { Provider, useStore } = createContext(initialState);
 // initialize store methods
 export const initializeStore = (preloadedState = {}) =>
   create(
-    persist(
-      (set, get) => ({
-        ...initialState,
-        ...preloadedState,
-        logIn: () => {
-          // on admin login
-          set({ loggedIn: true });
-        },
-        logOut: () => {
-          // on admin logout
-          set({ loggedIn: false });
-        },
-        setSearch: (searchTerm) => {
-          // on user search
-          set({ search: searchTerm });
-        },
-        clearSearch: () => {
-          // on user clear
-          set({ search: initialState.search });
-        },
-        getTags: async () => {
-          // on load
-          // set({ tags: await tryGetTags() });
-        },
-        addFilter: (tag) => {
-          // on user select
-          set({ tags: get().filter.push(tag) });
-        },
-        popFilter: (tag) => {
-          // on user deselect
-          set({ tags: get().filter.pop(tag) });
-        },
-      }),
-      {
-        name: "global-store",
-        getStorage: () => sessionStorage,
-      }
+    devtools(
+      persist(
+        (set, get) => ({
+          ...initialState,
+          ...preloadedState,
+          setLoggedIn: (loggedIn) => {
+            // on admin login
+            set({ loggedIn: loggedIn });
+          },
+          setSearch: (searchTerm) => {
+            // on user search
+            set({ search: searchTerm });
+          },
+          clearSearch: () => {
+            // on user clear
+            set({ search: initialState.search });
+          },
+          getTags: async () => {
+            // on load
+            // set({ tags: await tryGetTags() });
+          },
+          addFilter: (tag) => {
+            // on user select
+            set({ tags: get().filter.push(tag) });
+          },
+          popFilter: (tag) => {
+            // on user deselect
+            set({ tags: get().filter.pop(tag) });
+          },
+        }),
+        {
+          name: "global-store",
+          getStorage: () => sessionStorage,
+        }
+      )
     )
   );
 

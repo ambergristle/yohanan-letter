@@ -15,7 +15,15 @@ import tryLogout from "../../../utils/requests/tryLogout";
 
 // site navigation, search (regex), filter (posts with tag(s))
 const DesktopMenu = () => {
-  const { loggedIn, filter } = useStore();
+  const [loggedIn, setLoggedIn] = useStore((state) => [
+    state.loggedIn,
+    state.setLoggedIn,
+  ]);
+
+  const { login, logout } = {
+    login: { label: "login", action: () => tryLogout(setLoggedIn) },
+    logout: { label: "logout", action: () => Router.push("/login") },
+  };
 
   return (
     <Box width="100%" display={{ xs: "none", sm: "flex" }}>
@@ -25,6 +33,10 @@ const DesktopMenu = () => {
       <NavButton label="bio" href="/bio" />
       <NavButton label="contact" href="/contact" />
       <NavButton label="publish" href="/publish" />
+      <ActionButton
+        label={loggedIn ? "logout" : "login"}
+        onClick={loggedIn ? login.action : logout.action}
+      />
     </Box>
   );
 };

@@ -18,12 +18,6 @@ import PostItem from "./PostItem";
 import { v4 as uuid } from "uuid";
 import FormikValues from "../FormikForm/FormikValues";
 
-const tags = [
-  { id: uuid(), name: "first" },
-  { id: uuid(), name: "second" },
-  { id: uuid(), name: "third" },
-];
-
 // input requirements; error messages disabled
 const validationSchema = yup.object({
   subject: yup.string().max(100).required(""),
@@ -50,7 +44,7 @@ const validationSchema = yup.object({
 });
 
 // edit and schedule newsletter drafts
-const PublisherForm = ({ draft }) => {
+const PublisherForm = ({ draft, tags }) => {
   const [tagOptions, setTagOptions] = useState(tags);
 
   return (
