@@ -16,7 +16,7 @@ let store;
 const initialState = {
   loggedIn: false,
   tags: [],
-  search: "lol",
+  search: "",
   filter: [],
 };
 

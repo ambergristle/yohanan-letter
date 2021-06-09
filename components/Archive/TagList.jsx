@@ -1,20 +1,27 @@
-import { Box, Chip } from "@material-ui/core";
+import { Box, Chip, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  tagChip: { marginRight: "5px" },
+}));
 
 // render list of tags
 const TagList = ({ tags }) => {
+  const { tagChip } = useStyles();
+
   const filter = (tagId) => {
     console.log(tagId);
   };
 
   return (
     <Box>
-      {tags.map((tag) => (
+      {tags.map(({ id, name }) => (
         <Chip
-          key={tag.id}
-          label={tag.name}
-          onClick={() => filter(tag.id)}
+          key={id}
+          label={name}
+          onClick={() => filter(id)}
           size="small"
           disableRipple
+          className={tagChip}
         />
       ))}
     </Box>

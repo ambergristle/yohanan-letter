@@ -2,11 +2,11 @@ import Head from "next/head";
 
 import getPosts from "../../utils/queries/getPosts";
 
+import Post from "../../components/Archive/Post";
 import PostList from "../../components/Archive/PostList";
 
-const Archive = ({ posts }) => {
+const ArchiveQuery = ({ posts }) => {
   posts = JSON.parse(posts);
-  const letter = false;
 
   return (
     <>
@@ -25,11 +25,9 @@ export const getServerSideProps = async (context) => {
   // query.length can be used to identify letter
 
   // pass posts or null to component as props
-  // const letter = (await getLetter(slug)) || null;
   const posts = (await getPosts(slug)) || null;
 
-  // return letter || posts;
   return { props: { posts } };
 };
 
-export default Archive;
+export default ArchiveQuery;
