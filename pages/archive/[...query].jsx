@@ -2,7 +2,6 @@ import Head from "next/head";
 
 import getPosts from "../../utils/queries/getPosts";
 
-import Post from "../../components/Archive/Post";
 import PostList from "../../components/Archive/PostList";
 
 const ArchiveQuery = ({ posts }) => {

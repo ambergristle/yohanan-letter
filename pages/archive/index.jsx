@@ -3,7 +3,6 @@ import Head from "next/head";
 import getPosts from "../../utils/queries/getPosts";
 
 import PostList from "../../components/Archive/PostList";
-import Loading from "../../components/Layout/Loading";
 
 const Archive = ({ posts }) => {
   posts = JSON.parse(posts);
@@ -14,7 +13,6 @@ const Archive = ({ posts }) => {
         <meta name="description" content="No Ads. No Fees. No Bullshit." />
       </Head>
       <PostList posts={posts} />
-      <Loading size={100} />
     </>
   );
 };
