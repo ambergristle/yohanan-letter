@@ -1,3 +1,4 @@
+import NextApp from "next/app";
 import { useEffect } from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
 import Layout from "../components/Layout/Layout";

@@ -3,18 +3,21 @@ import axios from "axios";
 
 // axios request with login details; triggers form error if invalid
 // args passed from formik
-const tryLogin = async ({ email, password }, { setFieldError }) => {
+const tryLogin = async (
+  { email, password },
+  { setFieldError },
+  setLoggedIn
+) => {
   try {
-    const response = await axios.post("/api/users/login", {
-      email,
-      password,
-    });
+    const response = await axios.post("/api/users/login", { email, password });
 
-    // redirect
-    return Router.push("/publish");
+    // redirect and set loggedIn state
+    Router.push("/publish");
+    return setLoggedIn(true);
   } catch (error) {
     if (error.response) {
       const { field, helperText } = error.response.data;
+
       return setFieldError(field, helperText); // set form or field errors
     }
 

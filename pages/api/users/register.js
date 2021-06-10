@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import prisma from "../prisma";
+import prisma from "../../../utils/prisma/prisma";
 import { authorize } from "../../../utils/auth/tokens";
 
 // register new user

@@ -1,12 +1,13 @@
 import Router from "next/router";
 import axios from "axios";
 
-const tryLogout = async () => {
+const tryLogout = async (setLoggedIn) => {
   try {
     const response = await axios.delete("/api/users/logout");
 
-    // redirect
-    return Router.push("/");
+    // redirect and set loggedIn state
+    Router.push("/");
+    return setLoggedIn(false);
   } catch (error) {
     console.log(error);
   }

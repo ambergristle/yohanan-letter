@@ -1,4 +1,4 @@
-import prisma from "../prisma";
+import prisma from "../../../utils/prisma/prisma";
 import { refreshAccessToken } from "../../../utils/auth/tokens";
 
 // refresh token if valid

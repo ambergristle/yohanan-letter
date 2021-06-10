@@ -34,13 +34,16 @@ const LoginForm = () => {
 
   const setLoggedIn = useStore((state) => state.setLoggedIn);
 
+  const handleLogin = (values, actions) =>
+    tryLogin(values, actions, setLoggedIn);
+
   return (
     <Box display="flex" justifyContent="center">
       <Paper variant="outlined">
         <FormikForm
           initialValues={initialValues}
           validationSchema={validationSchema}
-          handleSubmit={tryLogin}
+          handleSubmit={handleLogin}
         >
           <FormikField
             name="email"

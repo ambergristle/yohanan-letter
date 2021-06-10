@@ -22,7 +22,7 @@ const FormikButton = ({ type, label, startIcon, endIcon, ...props }) => {
   const error = errors.action; // display form action error
 
   return (
-    <Box display="flex" alignItems="center">
+    <Box display="flex" alignItems="center" justifyContent="center">
       <Box position="relative">
         <Button
           {...props}

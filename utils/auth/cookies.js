@@ -2,12 +2,13 @@ import cookie from "cookie";
 
 const PROD = process.env.NODE_ENV !== "development";
 
-// set http-only cookie that expires in one day
-export const setCookie = (res, refreshToken) => {
+// jid, refreshToken, true
+// set cookie that expires in one day
+export const setCookie = (res, name, value, httpOnly) => {
   res.setHeader(
     "Set-Cookie",
-    cookie.serialize("jid", refreshToken, {
-      httpOnly: true,
+    cookie.serialize(name, value, {
+      httpOnly: httpOnly,
       secure: PROD,
       sameSite: true,
       path: "/",
@@ -16,14 +17,12 @@ export const setCookie = (res, refreshToken) => {
   );
 };
 
-// domain: ".example.com"
-
 // erase cookie by resetting expiration to past
-export const deleteCookie = (res) => {
+export const deleteCookie = (res, name, httpOnly) => {
   res.setHeader(
     "Set-Cookie",
-    cookie.serialize("jid", "", {
-      httpOnly: true,
+    cookie.serialize(name, "", {
+      httpOnly: httpOnly,
       secure: PROD,
       sameSite: true,
       path: "/",

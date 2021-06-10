@@ -1,4 +1,5 @@
 import Router from "next/router";
+import { useState, useEffect } from "react";
 
 import { Box, Grid, makeStyles } from "@material-ui/core";
 
@@ -20,10 +21,8 @@ const DesktopMenu = () => {
     state.setLoggedIn,
   ]);
 
-  const { login, logout } = {
-    login: { label: "login", action: () => tryLogout(setLoggedIn) },
-    logout: { label: "logout", action: () => Router.push("/login") },
-  };
+  const logIn = () => Router.push("/login");
+  const logOut = () => tryLogout(setLoggedIn);
 
   return (
     <Box width="100%" display={{ xs: "none", sm: "flex" }}>
@@ -33,10 +32,12 @@ const DesktopMenu = () => {
       <NavButton label="bio" href="/bio" />
       <NavButton label="contact" href="/contact" />
       <NavButton label="publish" href="/publish" />
-      <ActionButton
-        label={loggedIn ? "logout" : "login"}
-        onClick={loggedIn ? login.action : logout.action}
-      />
+      <Box ml="5px" display="flex" alignItems="center">
+        <ActionButton
+          label={loggedIn ? "logout" : "login"}
+          onClick={loggedIn ? logOut : logIn}
+        />
+      </Box>
     </Box>
   );
 };

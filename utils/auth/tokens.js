@@ -30,7 +30,7 @@ export const refreshAccessToken = (refreshToken) => {
 // authorization middleware, wraps request handlers
 export const authorize = (handler, adminRequired) => {
   return async (req, res) => {
-    // parse refresh token
+    // extract refresh token
     const refreshToken = req.cookies.jid;
 
     // if token missing, return error

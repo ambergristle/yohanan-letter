@@ -33,9 +33,7 @@ const login = async (req, res) => {
   try {
     // get user from db by email
     const user = await prisma.user.findUnique({
-      where: {
-        email: email,
-      },
+      where: { email: email },
     });
 
     // if user not found
@@ -55,7 +53,7 @@ const login = async (req, res) => {
       });
 
       // set http-only cookie with refresh token
-      setCookie(res, refreshToken);
+      setCookie(res, "jid", refreshToken, true);
 
       // authorize authenticated user
       return res.status(200).json({ accessToken, refreshToken });
