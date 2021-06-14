@@ -34,8 +34,7 @@ const validationSchema = yup.object({
 });
 
 const UserForm = ({ users }) => {
-  const newUser = { id: uuid(), role: "STAFF", email: "", password: "" };
-  const initialValues = { users: users || [newUser] };
+  const initialValues = { users };
 
   return (
     <FormikForm

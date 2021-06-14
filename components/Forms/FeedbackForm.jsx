@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-import trySend from "../../utils/requests/trySend";
+import trySendFeedback from "../../utils/requests/trySendFeedback";
 
 import { Paper, makeStyles } from "@material-ui/core";
 
@@ -30,7 +30,7 @@ const FeedbackForm = () => {
     <FormikForm
       initialValues={initialValues}
       validationSchema={validationSchema}
-      handleSubmit={trySend}
+      handleSubmit={trySendFeedback}
     >
       <Paper variant="outlined" elevation={0}>
         <FormikField

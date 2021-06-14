@@ -1,11 +1,10 @@
 import bcrypt from "bcrypt";
 import prisma from "../../../utils/prisma/prisma";
-import { authorize } from "../../../utils/auth/tokens";
 
 // register new user
 const register = async (req, res) => {
-  if (req.method !== "POST") return res.status(405);
-  if (!req.body) return res.status(400);
+  if (req.method !== "POST") return res.status(405).end();
+  if (!req.body) return res.status(400).end();
 
   const { email, password, role } = req.body;
 
@@ -18,23 +17,25 @@ const register = async (req, res) => {
     });
 
     // deny duplicate email creation
-    if (userExists) return res.status(403);
+    if (userExists) return res.status(403).end();
 
     // hash password and create user
     const hash = await bcrypt.hash(password, 10);
     await prisma.user.create({
-      email: email,
-      password: hash,
-      role: role,
+      data: {
+        email: email,
+        password: hash,
+        role: role,
+      },
     });
 
-    res.status(201);
+    res.status(201).end();
   } catch (error) {
     console.error(error);
-    return res.status(500);
+    return res.status(500).end();
   } finally {
     await prisma.$disconnect();
   }
 };
 
-export default authorize(register, true);
+export default register;

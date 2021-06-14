@@ -8,7 +8,7 @@ const newMessage = ({ from, message }) => ({
   text: message,
 });
 
-const sendFeedback = async (feedback, { setSubmitting, resetForm }) => {
+const trySendFeedback = async (feedback, { setSubmitting, resetForm }) => {
   const message = newMessage(feedback);
 
   try {
@@ -24,4 +24,4 @@ const sendFeedback = async (feedback, { setSubmitting, resetForm }) => {
   }
 };
 
-export default sendFeedback;
+export default trySendFeedback;

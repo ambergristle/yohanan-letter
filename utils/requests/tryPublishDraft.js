@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const tryPublish = async (draft, action) => {
+const tryPublishDraft = async (draft, action) => {
   try {
     switch (action) {
       // save draft
@@ -19,4 +19,4 @@ const tryPublish = async (draft, action) => {
   }
 };
 
-export default tryPublish;
+export default tryPublishDraft;

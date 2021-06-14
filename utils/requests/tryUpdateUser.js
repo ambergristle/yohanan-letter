@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const tryUpdate = (user) => {
+const tryUpdateUser = (user) => {
   try {
     const response = axios.patch("/api/users/update", user);
 
@@ -10,4 +10,4 @@ const tryUpdate = (user) => {
   }
 };
 
-export default tryUpdate;
+export default tryUpdateUser;

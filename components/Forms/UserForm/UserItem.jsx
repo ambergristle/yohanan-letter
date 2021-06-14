@@ -16,6 +16,10 @@ import EditIcon from "@material-ui/icons/Edit";
 import SaveIcon from "@material-ui/icons/Save";
 import DeleteIcon from "@material-ui/icons/Delete";
 
+import tryRegisterUser from "../../../utils/requests/tryRegisterUser";
+import tryUpdateUser from "../../../utils/requests/tryUpdateUser";
+import tryDeleteUser from "../../../utils/requests/tryDeleteUser";
+
 import FormikSelect from "../FormikForm/FormikSelect";
 import FormikField from "../FormikForm/FormikField";
 import FormikValues from "../FormikForm/FormikValues";
@@ -55,14 +59,7 @@ const useStyles = makeStyles((theme) => ({
 const UserItem = ({ index, name, only, last, handleAdd, handleDel }) => {
   const { userSelectField, userTextField, addUserButton } = useStyles();
 
-  const [editing, setEditing] = useState(!email || false);
-  const toggleEditing = () => setEditing(!editing);
-
   const roleOptions = ["ADMIN", "STAFF"];
-
-  const [field, { value, initialValue }, helpers] = useField(name);
-
-  const { id, role, email, password } = value;
 
   const addUser = () => {
     handleAdd({
@@ -73,11 +70,17 @@ const UserItem = ({ index, name, only, last, handleAdd, handleDel }) => {
     });
   };
 
-  const saveUser = () => {
+  const [field, { value, initialValue }, helpers] = useField(name);
+
+  const { id, role, email, password } = value;
+
+  const [editing, setEditing] = useState(!email || false);
+  const toggleEditing = () => setEditing(!editing);
+
+  const saveUser = async () => {
     // if new user, post
     if (!initialValue) {
-      console.log("new", { id, role, email, password });
-      return;
+      const newUser = await tryRegisterUser({ id, role, email, password });
     }
 
     // else, check which values updated
@@ -86,21 +89,20 @@ const UserItem = ({ index, name, only, last, handleAdd, handleDel }) => {
     const passwordChanged = password ? true : false;
 
     // create object with updated field(s) only
-    const updatedField = {
+    const updatedFields = {
       id,
       ...(roleChanged && { role }),
       ...(emailChanged && { email }),
       ...(passwordChanged && { password }),
     };
 
-    console.log(roleChanged, emailChanged, passwordChanged);
-    console.log(updatedField);
+    tryUpdateUser(updatedFields);
 
     toggleEditing();
   };
 
-  const delUser = () => {
-    // const userDeleted = tryDelUser();
+  const delUser = (id) => {
+    // tryDeleteUser({ id });
     handleDel(index);
   };
 

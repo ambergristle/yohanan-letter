@@ -8,7 +8,7 @@ import FormikField from "./FormikForm/FormikField";
 import FormikButton from "./FormikForm/FormikButton";
 
 import { useStore } from "../../utils/store/store";
-import tryLogin from "../../utils/requests/tryLogin";
+import tryLoginUser from "../../utils/requests/tryLoginUser";
 
 const useStyles = makeStyles((theme) => ({
   validatedInput: { marginBottom: "20px" },
@@ -35,7 +35,7 @@ const LoginForm = () => {
   const setLoggedIn = useStore((state) => state.setLoggedIn);
 
   const handleLogin = (values, actions) =>
-    tryLogin(values, actions, setLoggedIn);
+    tryLoginUser(values, actions, setLoggedIn);
 
   return (
     <Box display="flex" justifyContent="center">

@@ -12,7 +12,7 @@ import Filter from "./Filter";
 
 import { useStore } from "../../../utils/store/store";
 
-import tryLogout from "../../../utils/requests/tryLogout";
+import tryLogoutUser from "../../../utils/requests/tryLogoutUser";
 
 // site navigation, search (regex), filter (posts with tag(s))
 const DesktopMenu = () => {
@@ -22,7 +22,7 @@ const DesktopMenu = () => {
   ]);
 
   const logIn = () => Router.push("/login");
-  const logOut = () => tryLogout(setLoggedIn);
+  const logOut = () => tryLogoutUser(setLoggedIn);
 
   return (
     <Box width="100%" display={{ xs: "none", sm: "flex" }}>
@@ -46,7 +46,7 @@ export default DesktopMenu;
 
 // <Box ml="5px" display="flex" alignItems="center">
 //   {loggedIn ? (
-//     <ActionButton label="logout" onClick={tryLogout} />
+//     <ActionButton label="logout" onClick={tryLogoutUser} />
 //   ) : (
 //     <ActionButton label="login" onClick={() => Router.push("/login")} />
 //   )}

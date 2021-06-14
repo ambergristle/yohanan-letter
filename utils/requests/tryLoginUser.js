@@ -3,7 +3,7 @@ import axios from "axios";
 
 // axios request with login details; triggers form error if invalid
 // args passed from formik
-const tryLogin = async (
+const tryLoginUser = async (
   { email, password },
   { setFieldError },
   setLoggedIn
@@ -25,4 +25,4 @@ const tryLogin = async (
   }
 };
 
-export default tryLogin;
+export default tryLoginUser;

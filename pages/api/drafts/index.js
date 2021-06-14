@@ -1,7 +1,7 @@
 import prisma from "../../../utils/prisma/prisma";
 
 import { authorize } from "../../../utils/auth/tokens";
-import trySchedule from "../../../utils/requests/trySchedule";
+import tryScheduleLetter from "../../../utils/requests/tryScheduleLetter";
 
 import upsertDraft from "../../../utils/constructors/upsertDraft";
 import newLetter from "../../../utils/constructors/newLetter";
@@ -30,7 +30,7 @@ const drafts = async (req, res) => {
         // const singleSends = newLetter(draft);
         //
         // const responses = await Promise.all(
-        //   singleSends.map(async (send) => await trySchedule(send))
+        //   singleSends.map(async (send) => await tryScheduleLetter(send))
         // );
         //
         // const failed = responses.find((send) => send > 200);

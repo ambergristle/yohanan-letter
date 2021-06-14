@@ -8,7 +8,7 @@ const request = {
 };
 
 // schedule single-send
-const trySchedule = async (letter) => {
+const tryScheduleLetter = async (letter) => {
   console.log(letter);
   try {
     const [response, body] = await client.request({
@@ -27,4 +27,4 @@ const trySchedule = async (letter) => {
   }
 };
 
-export default trySchedule;
+export default tryScheduleLetter;

@@ -1,7 +1,7 @@
 import Router from "next/router";
 import axios from "axios";
 
-const tryLogout = async (setLoggedIn) => {
+const tryLogoutUser = async (setLoggedIn) => {
   try {
     const response = await axios.delete("/api/users/logout");
 
@@ -13,4 +13,4 @@ const tryLogout = async (setLoggedIn) => {
   }
 };
 
-export default tryLogout;
+export default tryLogoutUser;

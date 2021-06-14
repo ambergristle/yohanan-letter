@@ -15,7 +15,7 @@ export const getServerSideProps = async ({ req }) => {
   // redirect to login if no refresh token (cookie)
   if (!jid) return redirect;
 
-  // check refreshA token and get access token if valid
+  // check refresh token and get access token if valid
   const token = await getToken(jid);
   if (!token) return redirect;
 

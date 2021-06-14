@@ -1,7 +1,7 @@
 import { useFormikContext } from "formik";
 
 import { initialValues } from "../../../utils/constructors/initialValues";
-import tryPublish from "../../../utils/requests/tryPublish";
+import tryPublishDraft from "../../../utils/requests/tryPublishDraft";
 
 import { Box, makeStyles } from "@material-ui/core";
 
@@ -30,7 +30,7 @@ const Controls = () => {
 
   const handleSubmit = (event) => {
     setSubmitting(true);
-    tryPublish(values, event.target.innerText);
+    tryPublishDraft(values, event.target.innerText);
     setSubmitting(false);
   };
 
