@@ -9,6 +9,7 @@ const FormikArray = ({ children, name }) => {
   const fieldItem = (index, only, last, push, remove) =>
     cloneElement(child, {
       key: index,
+      index: index,
       name: `${name}[${index}]`,
       only: only,
       last: last,

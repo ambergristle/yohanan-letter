@@ -13,11 +13,11 @@ const getPosts = async (slug) => {
       },
     });
 
-    if (!response) return false;
+    if (!response) return null;
     return JSON.stringify(response);
   } catch (error) {
     console.error(error);
-    return false;
+    return null;
   } finally {
     await prisma.$disconnect();
   }

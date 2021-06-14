@@ -26,28 +26,3 @@ export const refreshAccessToken = (refreshToken) => {
 
   return newAccessToken;
 };
-
-// authorization middleware, wraps request handlers
-export const authorize = (handler, adminRequired) => {
-  return async (req, res) => {
-    // extract refresh token
-    const refreshToken = req.cookies.jid;
-
-    // if token missing, return error
-    if (!refreshToken) return res.status(401).json({});
-
-    // verify token
-    await jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, (err, user) => {
-      // if token invalid, return error
-      if (err) return res.status(403).end();
-
-      // if token invalid, return error
-
-      if (adminRequired && user.role !== "ADMIN") {
-        return res.status(401).end();
-      }
-
-      return handler(req, res, refreshToken);
-    });
-  };
-};

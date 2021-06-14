@@ -1,3 +1,5 @@
+import { useField } from "formik";
+
 import { Box, Paper, makeStyles } from "@material-ui/core";
 
 import AddCircleIcon from "@material-ui/icons/AddCircle";
@@ -8,12 +10,10 @@ import { makePost } from "../../../utils/constructors/initialValues";
 import FormikField from "../FormikForm/FormikField";
 import FormikQuill from "../FormikForm/FormikQuill";
 import FormikArray from "../FormikForm/FormikArray";
-import FormikAutocomplete from "../FormikForm/FormikAutocomplete";
+import FormikMultiSelect from "../FormikForm/FormikMultiSelect";
 import FormikIconButton from "../FormikForm/FormikIconButton";
 
 import SourceItem from "./SourceItem";
-
-import { useField } from "formik";
 
 const useStyles = makeStyles((theme) => ({
   postItem: {
@@ -66,7 +66,7 @@ const PostItem = ({
         <FormikArray name={`${name}.sources`}>
           <SourceItem />
         </FormikArray>
-        <FormikAutocomplete
+        <FormikMultiSelect
           name={`${name}.tags`}
           placeholder="Tags..."
           options={tagOptions}
@@ -83,7 +83,7 @@ const PostItem = ({
       {last && (
         <FormikIconButton
           color="primary"
-          icon={<AddCircleIcon fontSize={"large"} />}
+          icon={<AddCircleIcon fontSize="large" />}
           handleClick={addPost}
         />
       )}

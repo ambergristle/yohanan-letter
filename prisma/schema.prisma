@@ -16,8 +16,9 @@ model User {
 }
 
 enum Role {
-  USER
   ADMIN
+  STAFF
+  USER
 }
 
 model Token {
