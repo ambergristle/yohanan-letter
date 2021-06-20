@@ -22,6 +22,9 @@ export const getServerSideProps = async (context) => {
   // pass posts or null to component as props
   const posts = (await getPosts()) || null;
 
+  if (!posts) return { notFound: true };
+  // or redirect
+
   return {
     props: { posts },
   };

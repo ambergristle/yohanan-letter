@@ -1,5 +1,3 @@
-import dynamic from "next/dynamic";
-
 import { useLayoutEffect } from "react";
 import create from "zustand";
 import createContext from "zustand/context";
@@ -73,7 +71,7 @@ export const useHydrate = (initialState) => {
     if (!store) store = _store;
 
     // if initialState changes, merge states, keeping client/server in sync
-    // ignore esling as code runs in same order in each environment
+    // ignore eslint as code runs in same order in each environment
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useLayoutEffect(() => {
       if (initialState && store) {
