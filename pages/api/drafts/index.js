@@ -1,6 +1,5 @@
 import prisma from "../../../utils/prisma/prisma";
 
-import { authorize } from "../../../utils/auth/tokens";
 import tryScheduleLetter from "../../../utils/requests/tryScheduleLetter";
 
 import upsertDraft from "../../../utils/constructors/upsertDraft";
@@ -58,5 +57,4 @@ const drafts = async (req, res) => {
   }
 };
 
-// require user to be logged in to access drafts
-export default authorize(drafts, false);
+export default drafts;
