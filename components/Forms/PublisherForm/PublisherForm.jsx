@@ -43,12 +43,12 @@ const validationSchema = yup.object({
 });
 
 // edit and schedule newsletter drafts
-const PublisherForm = ({ draft, tags }) => {
+const PublisherForm = ({ isDraft, draft, tags }) => {
   const [tagOptions, setTagOptions] = useState(tags);
 
   return (
     <FormikForm initialValues={draft} validationSchema={validationSchema}>
-      <Controls />
+      <Controls draft={isDraft} />
       <FormikField
         name="subject"
         type="text"

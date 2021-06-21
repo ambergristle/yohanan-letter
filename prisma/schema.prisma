@@ -28,7 +28,7 @@ model Letter {
   subject String
   intro   String
   draft   Boolean
-  slug    String
+  slug    String   @unique
   outro   String
   posts   Post[]
 
@@ -42,7 +42,7 @@ model Post {
   draft    Boolean
   title    String
   text     String
-  slug     String
+  slug     String   @unique
   letter   Letter   @relation(fields: [letterId], references: [id])
   sources  Source[]
   tags     Tag[]

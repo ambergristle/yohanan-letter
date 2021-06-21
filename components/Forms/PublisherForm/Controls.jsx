@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // save, clear, or schedule newsletter
-const Controls = () => {
+const Controls = ({ draft }) => {
   const { controlBox, controlButton, dateField } = useStyles();
   const { values, resetForm, setSubmitting } = useFormikContext();
   const { date } = values;
@@ -56,17 +56,20 @@ const Controls = () => {
           startIcon={<SaveIcon />}
           onClick={handleSubmit}
         />
-        <FormikButton
-          label="schedule"
-          color="primary"
-          startIcon={<ScheduleIcon />}
-          onClick={handleSubmit}
-        />
+        {draft && (
+          <FormikButton
+            label="schedule"
+            color="primary"
+            startIcon={<ScheduleIcon />}
+            onClick={handleSubmit}
+          />
+        )}
       </Box>
       <FormikDate
         name="date"
         format="MMMM dd @ HH:mm ZZZZ"
         className={dateField}
+        disabled={!draft}
       />
     </Box>
   );

@@ -3,9 +3,12 @@
 // convert date, title to slug (yyyy/mm/dd/post-title)
 // letter slug is yyyy/mm/dd
 const toSlug = (date, title) => {
-  date = date.slice(0, 10).replace(/-/g, "/");
-  title = "/" + title.toLowerCase().replace(/\W/g, "").replace(/ /g, "-");
-  return `${date}${title}`;
+  const dateString = date.slice(0, 10).replace(/-/g, "/");
+  const htmlSafeTitle = title
+    .toLowerCase()
+    .replace(/\W/g, "")
+    .replace(/ /g, "-");
+  return `${dateString}${title ? "/" : ""}${htmlSafeTitle}`;
 };
 
 // create list of sources (for post.create query)

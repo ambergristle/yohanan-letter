@@ -1,5 +1,5 @@
 import prisma from "../prisma/prisma";
-
+// 210621030544_made_slugs_unique
 // get newsletter draft
 const getLetter = async (slug) => {
   try {

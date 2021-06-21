@@ -20,11 +20,14 @@ const ArchiveQuery = ({ posts }) => {
 // get posts server-side
 export const getServerSideProps = async (context) => {
   const { query } = context.query;
-  const slug = query.join("/");
-  // query.length can be used to identify letter
 
-  // pass posts or null to component as props
+  console.log(query);
+  const slug = query.join("/");
+
+  // pass posts as props or redirect to 404
   const posts = (await getPosts(slug)) || null;
+
+  if (!posts) return { notFound: true };
 
   return { props: { posts } };
 };

@@ -1,11 +1,11 @@
-import getToken from "../utils/queries/getToken";
-import getDraft from "../utils/queries/getDraft";
-import getTags from "../utils/queries/getTags";
+import getToken from "../../utils/queries/getToken";
+import getDraft from "../../utils/queries/getDraft";
+import getTags from "../../utils/queries/getTags";
 
-import PublisherForm from "../components/Forms/PublisherForm/PublisherForm";
+import PublisherForm from "../../components/Forms/PublisherForm/PublisherForm";
 
 const Publish = ({ draft, tags }) => {
-  return <PublisherForm draft={JSON.parse(draft)} tags={tags} />;
+  return <PublisherForm isDraft={true} draft={JSON.parse(draft)} tags={tags} />;
 };
 
 // check token and get draft server-side
@@ -15,7 +15,7 @@ export const getServerSideProps = async ({ req }) => {
   // redirect to login if no refresh token (cookie)
   if (!jid) return redirect;
 
-  // check refreshA token and get access token if valid
+  // check refresh token and get access token if valid
   const token = await getToken(jid);
   if (!token) return redirect;
 
