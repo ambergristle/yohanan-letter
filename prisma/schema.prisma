@@ -1,10 +1,10 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model User {
@@ -12,58 +12,64 @@ model User {
   email    String @unique
   password String @db.Char(60)
   role     Role
-  @@map(name: "users")
-}
 
-enum Role {
-  ADMIN
-  STAFF
-  USER
+  @@map("users")
 }
 
 model Token {
   token String @id
-  @@map(name: "tokens")
+
+  @@map("tokens")
 }
 
 model Letter {
-  id      String @id @db.Char(36)
-  slug    String
-  draft   Boolean
+  id      String   @id @db.Char(36)
   date    DateTime
   subject String
   intro   String
-  posts   Post[]
+  draft   Boolean
+  slug    String
   outro   String
-  @@map(name: "letters")
+  posts   Post[]
+
+  @@map("letters")
 }
 
 model Post {
-  id       String @id @db.Char(36)
-  slug     String
-  draft    Boolean
+  id       String   @id @db.Char(36)
   date     DateTime
+  letterId String   @map("letter_id") @db.Char(36)
+  draft    Boolean
   title    String
-  text  String
+  text     String
+  slug     String
+  letter   Letter   @relation(fields: [letterId], references: [id])
   sources  Source[]
   tags     Tag[]
-  letter   Letter @relation(fields: [letterId], references: [id])
-  letterId String @db.Char(36) @map("letter_id")
-  @@map(name: "posts")
+
+  @@map("posts")
 }
 
 model Source {
   id     String @id @db.Char(36)
   title  String
   href   String
+  postId String @map("post_id") @db.Char(36)
   post   Post   @relation(fields: [postId], references: [id])
-  postId String @db.Char(36) @map("post_id")
-  @@map(name: "sources")
+
+  @@map("sources")
 }
 
 model Tag {
   id    String @id @db.Char(36)
   name  String @unique
   posts Post[]
-  @@map(name: "tags")
+
+  @@map("tags")
+}
+
+enum Role {
+  USER
+  ADMIN
+  STAFF
 }

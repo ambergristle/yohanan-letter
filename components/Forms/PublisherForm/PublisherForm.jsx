@@ -16,7 +16,6 @@ import Controls from "./Controls";
 import PostItem from "./PostItem";
 
 import { v4 as uuid } from "uuid";
-import FormikValues from "../FormikForm/FormikValues";
 
 // input requirements; error messages disabled
 const validationSchema = yup.object({
@@ -68,7 +67,6 @@ const PublisherForm = ({ draft, tags }) => {
         placeholder="Next week I’ll be talking about..."
         className="outro"
       />
-      <FormikValues />
     </FormikForm>
   );
 };

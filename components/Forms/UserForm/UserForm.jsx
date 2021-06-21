@@ -7,8 +7,6 @@ import FormikForm from "../FormikForm/FormikForm";
 import FormikArray from "../FormikForm/FormikArray";
 import UserItem from "./UserItem";
 
-import FormikValues from "../FormikForm/FormikValues";
-
 const mustInclude = (charType) =>
   `Password must include at least two ${charType}`;
 
@@ -44,7 +42,6 @@ const UserForm = ({ users }) => {
       <FormikArray name="users">
         <UserItem />
       </FormikArray>
-      <FormikValues />
     </FormikForm>
   );
 };
