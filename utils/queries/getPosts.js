@@ -6,10 +6,14 @@ const getPosts = async (slug) => {
     const response = await prisma.post.findMany({
       where: {
         slug: { startsWith: slug },
+        draft: false,
       },
       include: {
         sources: true,
         tags: true,
+      },
+      orderBy: {
+        date: "desc",
       },
     });
 

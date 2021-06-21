@@ -6,8 +6,8 @@ const toSlug = (date, title) => {
   const dateString = date.slice(0, 10).replace(/-/g, "/");
   const htmlSafeTitle = title
     .toLowerCase()
-    .replace(/\W/g, "")
-    .replace(/ /g, "-");
+    .replace(/[^A-Za-z0-9_-\s]/g, "")
+    .replace(/\s/g, "-");
   return `${dateString}${title ? "/" : ""}${htmlSafeTitle}`;
 };
 
@@ -58,7 +58,7 @@ const upsertPosts = (posts, publish) => ({
       ...post,
     },
     update: {
-      draft: !publish,
+      ...(publish && { draft: false }),
       slug: toSlug(post.date, post.title),
       sources: upsertSources(sources),
       tags: connectOrCreateTags(tags),
@@ -68,7 +68,7 @@ const upsertPosts = (posts, publish) => ({
 });
 
 // create upsert draft query
-const upsertDraft = ({ id, posts, ...draft }, publish) => ({
+const upsertDraft = ({ id, posts, ...draft }, publish = false) => ({
   where: { id: id },
   create: {
     id: id,
@@ -79,7 +79,7 @@ const upsertDraft = ({ id, posts, ...draft }, publish) => ({
   },
   update: {
     slug: toSlug(draft.date, ""),
-    draft: !publish,
+    ...(publish && { draft: false }),
     posts: upsertPosts(posts, publish),
     ...draft,
   },
