@@ -40,7 +40,7 @@ const Post = ({ post: { title, date, text, sources, tags, slug } }) => {
       >
         {parse(preview ? truncate(text, 500) : text)}
       </Box>
-      {!preview && <SourceList sources={sources} />}
+      {!preview && sources && <SourceList sources={sources} />}
       {preview && (
         <Box display="flex" justifyContent="flex-end">
           <ReadMoreButton slug={slug} />

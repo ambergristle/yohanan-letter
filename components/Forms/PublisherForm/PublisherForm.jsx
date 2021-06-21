@@ -46,6 +46,10 @@ const validationSchema = yup.object({
 const PublisherForm = ({ isDraft, draft, tags }) => {
   const [tagOptions, setTagOptions] = useState(tags);
 
+  // add empty source if none in post
+  const { posts } = draft;
+  draft.posts = posts.map((post) => ({ sources: makeSource(), ...post }));
+
   return (
     <FormikForm initialValues={draft} validationSchema={validationSchema}>
       <Controls draft={isDraft} />

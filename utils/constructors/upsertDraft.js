@@ -11,6 +11,10 @@ const toSlug = (date, title) => {
   return `${dateString}${title ? "/" : ""}${htmlSafeTitle}`;
 };
 
+// filter "sources" with no title or href
+const filterSources = (sources) =>
+  sources.filter((source) => source.title && source.href);
+
 // create list of sources (for post.create query)
 const createSources = (sources) => ({
   create: sources.map((source) => source),
@@ -35,36 +39,77 @@ const connectOrCreateTags = (tags) => ({
 });
 
 // create list of posts (for draft.create and draft.upsert)
+// const createPosts = (posts) => ({
+//   create: posts.map(({ sources, tags, ...post }) => ({
+//     slug: toSlug(post.date, post.title),
+//     draft: true,
+//     sources: createSources(sources),
+//     tags: connectOrCreateTags(tags),
+//     ...post,
+//   })),
+// });
+//
 const createPosts = (posts) => ({
-  create: posts.map(({ sources, tags, ...post }) => ({
-    slug: toSlug(post.date, post.title),
-    draft: true,
-    sources: createSources(sources),
-    tags: connectOrCreateTags(tags),
-    ...post,
-  })),
+  create: posts.map(({ sources, tags, ...post }) => {
+    const filteredSources = filterSources(sources);
+    const anySources = filteredSources.length > 0;
+
+    return {
+      slug: toSlug(post.date, post.title),
+      draft: true,
+      ...(anySources && { sources: createSources(filteredSources) }),
+      tags: connectOrCreateTags(tags),
+      ...post,
+    };
+  }),
 });
 
 // upsert list of posts (for draft.upsert)
+// const upsertPosts = (posts, publish) => ({
+//   upsert: posts.map(({ id, sources, tags, ...post }) => ({
+//     where: { id: id },
+//     create: {
+//       id: id,
+//       slug: toSlug(post.date, post.title),
+//       draft: true,
+//       sources: createSources(sources),
+//       tags: connectOrCreateTags(tags),
+//       ...post,
+//     },
+//     update: {
+//       ...(publish && { draft: false }),
+//       slug: toSlug(post.date, post.title),
+//       sources: upsertSources(sources),
+//       tags: connectOrCreateTags(tags),
+//       ...post,
+//     },
+//   })),
+// });
+
 const upsertPosts = (posts, publish) => ({
-  upsert: posts.map(({ id, sources, tags, ...post }) => ({
-    where: { id: id },
-    create: {
-      id: id,
-      slug: toSlug(post.date, post.title),
-      draft: true,
-      sources: createSources(sources),
-      tags: connectOrCreateTags(tags),
-      ...post,
-    },
-    update: {
-      ...(publish && { draft: false }),
-      slug: toSlug(post.date, post.title),
-      sources: upsertSources(sources),
-      tags: connectOrCreateTags(tags),
-      ...post,
-    },
-  })),
+  upsert: posts.map(({ id, sources, tags, ...post }) => {
+    const filteredSources = filterSources(sources);
+    const anySources = filteredSources.length > 0;
+
+    return {
+      where: { id: id },
+      create: {
+        id: id,
+        slug: toSlug(post.date, post.title),
+        draft: true,
+        ...(anySources && { sources: createSources(filteredSources) }),
+        tags: connectOrCreateTags(tags),
+        ...post,
+      },
+      update: {
+        ...(publish && { draft: false }),
+        slug: toSlug(post.date, post.title),
+        ...(anySources && { sources: upsertSources(filteredSources) }),
+        tags: connectOrCreateTags(tags),
+        ...post,
+      },
+    };
+  }),
 });
 
 // create upsert draft query
