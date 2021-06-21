@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const tryUpdateUser = (user) => {
+const tryUpdateUser = async (user) => {
   try {
-    const response = axios.patch("/api/users/update", user);
+    const response = await axios.patch("/api/users/update", user);
 
     return response;
   } catch (error) {
