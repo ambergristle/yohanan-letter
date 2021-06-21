@@ -81,22 +81,22 @@ const UserItem = ({ index, name, only, last, handleAdd, handleDel }) => {
     // if new user, post
     if (!initialValue) {
       const newUser = await tryRegisterUser({ id, role, email, password });
+    } else {
+      // else, check which values updated
+      const roleChanged = role !== initialValue?.role;
+      const emailChanged = email !== initialValue?.email;
+      const passwordChanged = password ? true : false;
+
+      // create object with updated field(s) only
+      const updatedFields = {
+        id,
+        ...(roleChanged && { role }),
+        ...(emailChanged && { email }),
+        ...(passwordChanged && { password }),
+      };
+
+      const updatedUser = tryUpdateUser(updatedFields);
     }
-
-    // else, check which values updated
-    const roleChanged = role !== initialValue?.role;
-    const emailChanged = email !== initialValue?.email;
-    const passwordChanged = password ? true : false;
-
-    // create object with updated field(s) only
-    const updatedFields = {
-      id,
-      ...(roleChanged && { role }),
-      ...(emailChanged && { email }),
-      ...(passwordChanged && { password }),
-    };
-
-    tryUpdateUser(updatedFields);
 
     toggleEditing();
   };

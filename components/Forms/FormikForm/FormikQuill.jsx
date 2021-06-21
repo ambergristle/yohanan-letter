@@ -18,7 +18,7 @@ const FormikQuill = ({ placeholder, ...props }) => {
   // wysiwyg settings; constain available formats
   const modules = {
     toolbar: false,
-    // keyboard: { bindings: { tab: { handler: () => true } } },
+    // keyboard: { bindings: { tab: { handler: (range, context) => true } } },
   };
   const formats = ["bold", "italic", "underline"];
 

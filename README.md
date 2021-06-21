@@ -6,7 +6,7 @@ creating and archiving newsletters
 - admin can create and publish posts, and add new admin users
 - _initially designed with csr + redux-toolkit, switched to next for seo + formik; global store no longer required_
 
-## v0 - in development
+## v0 - deployed at https://www.yolofail.com
 
 **built with next + postgresql using:**
 
@@ -17,3 +17,4 @@ creating and archiving newsletters
 - db connection: prisma
 - auth: bcrypt + jsonwebtoken
 - email + newsletter handling: sendgrid
+- global state (search, filter, logged-in): zustand

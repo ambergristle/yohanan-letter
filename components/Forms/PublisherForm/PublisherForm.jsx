@@ -33,8 +33,8 @@ const validationSchema = yup.object({
         .required(""),
       sources: yup.array().of(
         yup.object({
-          title: yup.string().required(""),
-          href: yup.string().required(""),
+          title: yup.string(),
+          href: yup.string(),
         })
       ),
     })
