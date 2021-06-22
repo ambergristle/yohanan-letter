@@ -20,7 +20,7 @@ const FormikQuill = ({ placeholder, ...props }) => {
     toolbar: false,
     // keyboard: { bindings: { tab: { handler: (range, context) => true } } },
   };
-  const formats = ["bold", "italic", "underline"];
+  const formats = ["bold", "italic", "underline", "link"];
 
   return (
     <QuillWrapper

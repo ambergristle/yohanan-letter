@@ -1,9 +1,9 @@
-// prisma "create" queries do not support nested update queries (@2.21.2)
+import { DateTime } from "luxon";
 
 // convert date, title to slug (yyyy/mm/dd/post-title)
 // letter slug is yyyy/mm/dd
 const toSlug = (date, title) => {
-  const dateString = date.slice(0, 10).replace(/-/g, "/");
+  const dateString = DateTime.fromISO(date).toFormat("yyyy/LL/dd");
   const htmlSafeTitle = title
     .toLowerCase()
     .replace(/[^A-Za-z0-9_-\s]/g, "")
@@ -39,54 +39,24 @@ const connectOrCreateTags = (tags) => ({
 });
 
 // create list of posts (for draft.create and draft.upsert)
-// const createPosts = (posts) => ({
-//   create: posts.map(({ sources, tags, ...post }) => ({
-//     slug: toSlug(post.date, post.title),
-//     draft: true,
-//     sources: createSources(sources),
-//     tags: connectOrCreateTags(tags),
-//     ...post,
-//   })),
-// });
-//
-const createPosts = (posts) => ({
+const createPosts = (date, posts) => ({
   create: posts.map(({ sources, tags, ...post }) => {
     const filteredSources = filterSources(sources);
     const anySources = filteredSources.length > 0;
 
     return {
-      slug: toSlug(post.date, post.title),
-      draft: true,
       ...(anySources && { sources: createSources(filteredSources) }),
       tags: connectOrCreateTags(tags),
       ...post,
+      draft: true,
+      date: date,
+      slug: toSlug(date, post.title),
     };
   }),
 });
 
 // upsert list of posts (for draft.upsert)
-// const upsertPosts = (posts, publish) => ({
-//   upsert: posts.map(({ id, sources, tags, ...post }) => ({
-//     where: { id: id },
-//     create: {
-//       id: id,
-//       slug: toSlug(post.date, post.title),
-//       draft: true,
-//       sources: createSources(sources),
-//       tags: connectOrCreateTags(tags),
-//       ...post,
-//     },
-//     update: {
-//       ...(publish && { draft: false }),
-//       slug: toSlug(post.date, post.title),
-//       sources: upsertSources(sources),
-//       tags: connectOrCreateTags(tags),
-//       ...post,
-//     },
-//   })),
-// });
-
-const upsertPosts = (posts, publish) => ({
+const upsertPosts = (date, posts, publish) => ({
   upsert: posts.map(({ id, sources, tags, ...post }) => {
     const filteredSources = filterSources(sources);
     const anySources = filteredSources.length > 0;
@@ -95,38 +65,42 @@ const upsertPosts = (posts, publish) => ({
       where: { id: id },
       create: {
         id: id,
-        slug: toSlug(post.date, post.title),
-        draft: true,
         ...(anySources && { sources: createSources(filteredSources) }),
         tags: connectOrCreateTags(tags),
         ...post,
+        draft: true,
+        date: date,
+        slug: toSlug(date, post.title),
       },
       update: {
-        ...(publish && { draft: false }),
-        slug: toSlug(post.date, post.title),
         ...(anySources && { sources: upsertSources(filteredSources) }),
         tags: connectOrCreateTags(tags),
         ...post,
+        ...(publish && { draft: false }),
+        slug: toSlug(date, post.title),
+        date: date,
       },
     };
   }),
 });
 
 // create upsert draft query
-const upsertDraft = ({ id, posts, ...draft }, publish = false) => ({
+const upsertDraft = ({ id, date, posts, ...draft }, publish = false) => ({
   where: { id: id },
   create: {
-    id: id,
-    slug: toSlug(draft.date, ""),
+    id,
+    date,
+    slug: toSlug(date, ""),
     draft: true,
-    posts: createPosts(posts),
+    posts: createPosts(date, posts),
     ...draft,
   },
   update: {
-    slug: toSlug(draft.date, ""),
-    ...(publish && { draft: false }),
-    posts: upsertPosts(posts, publish),
+    posts: upsertPosts(date, posts, publish),
     ...draft,
+    ...(publish && { draft: false }),
+    date: date,
+    slug: toSlug(date, ""),
   },
 });
 

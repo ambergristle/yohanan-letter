@@ -7,6 +7,9 @@ body {
 strong {
   color: rgba(252, 218, 183, 1);
 }
+a {
+  color: rgba(252, 218, 183, 1);
+}
 
 .quill {
   height: 25vh;

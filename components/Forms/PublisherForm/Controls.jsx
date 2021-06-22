@@ -42,13 +42,15 @@ const Controls = ({ draft }) => {
       className={controlBox}
     >
       <Box display="flex">
-        <FormikButton
-          label="clear"
-          color="primary"
-          className={controlButton}
-          startIcon={<DeleteIcon />}
-          onClick={handleClear}
-        />
+        {draft && (
+          <FormikButton
+            label="clear"
+            color="primary"
+            className={controlButton}
+            startIcon={<DeleteIcon />}
+            onClick={handleClear}
+          />
+        )}
         <FormikButton
           label="save"
           color="primary"

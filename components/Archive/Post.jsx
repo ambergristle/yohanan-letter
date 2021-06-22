@@ -19,6 +19,7 @@ const Post = ({ post: { title, date, text, sources, tags, slug } }) => {
   const { query } = router.query || null;
 
   const preview = !query || query < 4 ? true : false;
+  const areSources = sources.length > 0;
 
   text = text.replace(/<p><br><\/p>/g, "");
   const dateString = format(new Date(date), "MMMM dd, yyyy");
@@ -40,7 +41,7 @@ const Post = ({ post: { title, date, text, sources, tags, slug } }) => {
       >
         {parse(preview ? truncate(text, 500) : text)}
       </Box>
-      {!preview && sources && <SourceList sources={sources} />}
+      {!preview && areSources && <SourceList sources={sources} />}
       {preview && (
         <Box display="flex" justifyContent="flex-end">
           <ReadMoreButton slug={slug} />

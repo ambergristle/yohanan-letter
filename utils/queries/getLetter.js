@@ -9,8 +9,14 @@ const getLetter = async (slug) => {
       },
       include: {
         posts: {
-          include: {
-            sources: true,
+          select: {
+            id: true,
+            date: true,
+            draft: true,
+            title: true,
+            text: true,
+            slug: true,
+            sources: { select: { id: true, title: true, href: true } },
             tags: true,
           },
         },

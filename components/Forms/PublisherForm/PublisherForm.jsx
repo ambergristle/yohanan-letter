@@ -48,7 +48,10 @@ const PublisherForm = ({ isDraft, draft, tags }) => {
 
   // add empty source if none in post
   const { posts } = draft;
-  draft.posts = posts.map((post) => ({ sources: makeSource(), ...post }));
+  draft.posts = posts.map(({ sources, ...post }) => ({
+    sources: sources.length > 0 ? sources : [makeSource()],
+    ...post,
+  }));
 
   return (
     <FormikForm initialValues={draft} validationSchema={validationSchema}>

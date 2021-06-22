@@ -25,7 +25,6 @@ export const getServerSideProps = async ({ req, query }) => {
 
   // pass draft, tags as props or redirect to 404
   const letter = await getLetter(slug);
-
   const tags = await getTags();
 
   if (!letter) return { notFound: true };

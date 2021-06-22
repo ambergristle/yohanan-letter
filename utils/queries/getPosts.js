@@ -12,9 +12,6 @@ const getPosts = async (slug) => {
         sources: true,
         tags: true,
       },
-      orderBy: {
-        date: "desc",
-      },
     });
 
     if (!response) return null;
