@@ -31,7 +31,6 @@ const DesktopMenu = () => {
       <Filter />
       <NavButton label="bio" href="/bio" />
       <NavButton label="contact" href="/contact" />
-      <NavButton label="publish" href="/publish" />
       <Box ml="5px" display="flex" alignItems="center">
         <ActionButton
           label={loggedIn ? "logout" : "login"}

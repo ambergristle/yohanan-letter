@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import parse from "html-react-parser";
 import { format } from "date-fns";
 import { Paper, Box, Typography, makeStyles } from "@material-ui/core";
@@ -6,6 +6,12 @@ import { Paper, Box, Typography, makeStyles } from "@material-ui/core";
 import SourceList from "./SourceList";
 import TagList from "./TagList";
 import ReadMoreButton from "./ReadMoreButton";
+
+const useStyles = makeStyles((theme) => ({
+  titleLink: {
+    cursor: (preview) => (preview ? "pointer" : "default"),
+  },
+}));
 
 // truncate posts to preview length (char num)
 const truncate = (text, previewLength) => {
@@ -21,12 +27,21 @@ const Post = ({ post: { title, date, text, sources, tags, slug } }) => {
   const preview = !query || query < 4 ? true : false;
   const areSources = sources.length > 0;
 
+  const { titleLink } = useStyles(preview);
+
   text = text.replace(/<p><br><\/p>/g, "");
   const dateString = format(new Date(date), "MMMM dd, yyyy");
 
+  const goPost = () => Router.push(`/archive/${slug}`);
+
   return (
     <Paper variant="outlined">
-      <Typography variant="h4" color="primary">
+      <Typography
+        variant="h4"
+        color="primary"
+        className={titleLink}
+        onClick={goPost}
+      >
         {title}
       </Typography>
       <Typography variant="subtitle1" color="secondary">

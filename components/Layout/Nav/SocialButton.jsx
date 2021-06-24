@@ -10,7 +10,7 @@ const SocialButton = ({ label }) => {
     linkedin: <LinkedInIcon />,
   };
   const urls = {
-    twitter: "https://www.twitter.com",
+    twitter: "https://www.twitter.com/adamyohanan",
     linkedin: "https://www.linkedin.com/in/adamyohanan",
   };
   return (
