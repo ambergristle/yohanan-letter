@@ -21,6 +21,7 @@ const FormikDate = ({ placeholder, format, ...props }) => {
         {...props}
         onChange={(value) => setValue(value.toISO())}
         placeholder={placeholder}
+        disablePast
         autoOk
         disableToolbar
         ampm={false}

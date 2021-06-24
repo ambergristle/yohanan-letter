@@ -37,7 +37,7 @@ const Controls = ({ draft }) => {
     const submitAction = event.target.innerText;
 
     setSubmitting(true);
-    const { saved, scheduled } = tryPublishDraft(values, submitAction);
+    tryPublishDraft(values, submitAction);
 
     return setSubmitting(false);
   };

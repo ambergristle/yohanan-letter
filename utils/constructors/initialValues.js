@@ -16,12 +16,18 @@ export const makePost = (date) => ({
 
 // programmatically generate empty newsletter
 const makeDate = () => {
-  return DateTime.fromObject({
+  // const today = DateTime.local();
+
+  const sunday = DateTime.fromObject({
     hour: 8,
     minute: 0,
     second: 0,
     zone: "America/New_York",
   }).set({ weekday: 7 });
+
+  // if (today.weekday == 7) return sunday.plus({ weeks: 1 });
+
+  return sunday;
 };
 
 const makeDraft = () => {
