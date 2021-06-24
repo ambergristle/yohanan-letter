@@ -27,14 +27,14 @@ const drafts = async (req, res) => {
         const archived = await prisma.letter.upsert(upsertDraft(draft, true));
         if (!archived) return res.status(500);
 
-        // const singleSends = newLetter(draft);
-        //
-        // const responses = await Promise.all(
-        //   singleSends.map(async (send) => await tryScheduleLetter(send))
-        // );
-        //
-        // const failed = responses.find((send) => send > 200);
-        // if (failed) return res.status(failed).end();
+        const singleSends = newLetter(draft);
+
+        const responses = await Promise.all(
+          singleSends.map(async (send) => await tryScheduleLetter(send))
+        );
+
+        const failed = responses.find((send) => send > 200);
+        if (failed) return res.status(failed).end();
 
         return res.status(200).end();
 
