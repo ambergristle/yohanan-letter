@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { useFormikContext } from "formik";
 
 import { initialValues } from "../../../utils/constructors/initialValues";
@@ -24,14 +26,20 @@ const Controls = ({ draft }) => {
   const { values, resetForm, setSubmitting } = useFormikContext();
   const { date } = values;
 
+  const [isSaved, setIsSaved] = useState(false);
+  const [isScheduled, setIsScheduled] = useState(false);
+
   const handleClear = () => {
     resetForm({ values: initialValues });
   };
 
   const handleSubmit = (event) => {
+    const submitAction = event.target.innerText;
+
     setSubmitting(true);
-    tryPublishDraft(values, event.target.innerText);
-    setSubmitting(false);
+    const { saved, scheduled } = tryPublishDraft(values, submitAction);
+
+    return setSubmitting(false);
   };
 
   return (

@@ -21,7 +21,6 @@ const ArchiveQuery = ({ posts }) => {
 export const getServerSideProps = async (context) => {
   const { query } = context.query;
 
-  console.log(query);
   const slug = query.join("/");
 
   // pass posts as props or redirect to 404

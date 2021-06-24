@@ -18,6 +18,7 @@ const drafts = async (req, res) => {
       // update draft on save
       case "PATCH":
         const updated = await prisma.letter.upsert(upsertDraft(draft));
+
         if (!updated) return res.status(500).end();
         return res.status(201).end();
 

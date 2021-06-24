@@ -11,21 +11,26 @@ const toSlug = (date, title) => {
   return `${dateString}${title ? "/" : ""}${htmlSafeTitle}`;
 };
 
+const stripParams = (url) => url.replace(/\?.*$/, "");
+
 // filter "sources" with no title or href
 const filterSources = (sources) =>
   sources.filter((source) => source.title && source.href);
 
 // create list of sources (for post.create query)
 const createSources = (sources) => ({
-  create: sources.map((source) => source),
+  create: sources.map(({ href, ...source }) => ({
+    href: stripParams(href),
+    ...source,
+  })),
 });
 
 // upsert list of sources (for post.upsert query)
 const upsertSources = (sources) => ({
-  upsert: sources.map((source) => ({
-    where: { id: source.id },
-    create: source,
-    update: source,
+  upsert: sources.map(({ id, href, ...source }) => ({
+    where: { id: id },
+    create: { id, href: stripParams(href), ...source },
+    update: { href: stripParams(href), ...source },
   })),
 });
 
@@ -40,11 +45,12 @@ const connectOrCreateTags = (tags) => ({
 
 // create list of posts (for draft.create and draft.upsert)
 const createPosts = (date, posts) => ({
-  create: posts.map(({ sources, tags, ...post }) => {
+  create: posts.map(({ text, sources, tags, ...post }) => {
     const filteredSources = filterSources(sources);
     const anySources = filteredSources.length > 0;
 
     return {
+      text: text.replace(/<p><br><\/p>/g, ""),
       ...(anySources && { sources: createSources(filteredSources) }),
       tags: connectOrCreateTags(tags),
       ...post,
@@ -57,7 +63,7 @@ const createPosts = (date, posts) => ({
 
 // upsert list of posts (for draft.upsert)
 const upsertPosts = (date, posts, publish) => ({
-  upsert: posts.map(({ id, sources, tags, ...post }) => {
+  upsert: posts.map(({ id, text, sources, tags, ...post }) => {
     const filteredSources = filterSources(sources);
     const anySources = filteredSources.length > 0;
 
@@ -65,14 +71,16 @@ const upsertPosts = (date, posts, publish) => ({
       where: { id: id },
       create: {
         id: id,
+        text: text.replace(/<p><br><\/p>/g, ""),
         ...(anySources && { sources: createSources(filteredSources) }),
         tags: connectOrCreateTags(tags),
         ...post,
-        draft: true,
+        draft: publish ? false : true,
         date: date,
         slug: toSlug(date, post.title),
       },
       update: {
+        text: text.replace(/<p><br><\/p>/g, ""),
         ...(anySources && { sources: upsertSources(filteredSources) }),
         tags: connectOrCreateTags(tags),
         ...post,
@@ -91,7 +99,7 @@ const upsertDraft = ({ id, date, posts, ...draft }, publish = false) => ({
     id,
     date,
     slug: toSlug(date, ""),
-    draft: true,
+    draft: publish ? false : true,
     posts: createPosts(date, posts),
     ...draft,
   },

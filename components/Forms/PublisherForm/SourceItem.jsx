@@ -32,7 +32,7 @@ const SourceItem = ({ index, name, only, last, handleAdd, handleDel }) => {
         <FormikField
           name={`${name}.title`}
           type="text"
-          placeholder="Publication - Article Title"
+          placeholder="Publication: Article Title"
         />
         <FormikField
           name={`${name}.href`}
