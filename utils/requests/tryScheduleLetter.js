@@ -21,7 +21,7 @@ const tryScheduleLetter = async (letter) => {
     // send test email
     const [response] = await mail.send({
       from: "adam@yohananletter.com",
-      to: ["aristospanos@gmail.com"],
+      to: ["adam@yohananletter.com", "peter@yohananletter.com"],
       subject: `${subject} - TEST`,
       html: html_content,
     });
