@@ -8,7 +8,7 @@ import TagList from "./TagList";
 import ReadMoreButton from "./ReadMoreButton";
 
 const useStyles = makeStyles((theme) => ({
-  titleLink: {
+  postLink: {
     cursor: (preview) => (preview ? "pointer" : "default"),
   },
 }));
@@ -27,7 +27,7 @@ const Post = ({ post: { title, date, text, sources, tags, slug } }) => {
   const preview = !query || query < 4 ? true : false;
   const areSources = sources.length > 0;
 
-  const { titleLink } = useStyles(preview);
+  const { postLink } = useStyles(preview);
 
   text = text.replace(/<p><br><\/p>/g, "");
   const dateString = format(new Date(date), "MMMM dd, yyyy");
@@ -35,13 +35,8 @@ const Post = ({ post: { title, date, text, sources, tags, slug } }) => {
   const goPost = () => Router.push(`/archive/${slug}`);
 
   return (
-    <Paper variant="outlined">
-      <Typography
-        variant="h4"
-        color="primary"
-        className={titleLink}
-        onClick={goPost}
-      >
+    <Paper variant="outlined" className={postLink} onClick={goPost}>
+      <Typography variant="h4" color="primary">
         {title}
       </Typography>
       <Typography variant="subtitle1" color="secondary">

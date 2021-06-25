@@ -2,7 +2,7 @@ import { DateTime } from "luxon";
 import pug from "pug";
 
 import { segments, styles, strong, text } from "../constants/letter";
-const pugPath = "lib/constructors/template.pug";
+const pugPath = "utils/constructors/template.pug";
 
 // convert first char in string to upper
 const toCamel = (str) => str.charAt(0).toUpperCase() + str.slice(1);
@@ -23,7 +23,10 @@ const newLetter = ({ date, subject, intro, posts, ...draft }) => {
       letter: {
         date: longDate,
         intro: intro.replace("<strong>", strong["theme"]),
-        posts: posts.map((post) => post.replace("<strong>", strong["theme"])),
+        posts: posts.map(({ text, ...post }) => ({
+          text: text.replace("<strong>", strong["theme"]),
+          ...post,
+        })),
         ...draft,
       },
     };

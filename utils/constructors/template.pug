@@ -52,7 +52,7 @@ html
                   "color": styles.background
                 }) #{post.title}
                 div !{post.text}
-                strong More knowledge:
+                strong(style={"color": styles.colorSecondary}) More knowledge:
                 each source in post.sources
                   p: a(
                     href=source.href
