@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { useStore } from "../../../utils/store/store";
+import { useStore, getTagsSelector } from "../../../utils/store/store";
 
 import { Box, Chip, makeStyles } from "@material-ui/core";
 
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
 const Filter = () => {
   const { tagFilters } = useStyles();
 
-  const tags = useStore((state) => state.tags);
+  const tags = useStore(getTagsSelector);
 
   return (
     <Box
@@ -20,7 +20,7 @@ const Filter = () => {
       justifyContent="space-around"
       alignItems="center"
     >
-      {tags?.map(({ id, name }) => (
+      {tags?.slice(0, 5).map(({ id, name }) => (
         <Chip key={id} name={id} label={name} size="small" clickable />
       ))}
     </Box>

@@ -7,7 +7,7 @@ import FormikForm from "./FormikForm/FormikForm";
 import FormikField from "./FormikForm/FormikField";
 import FormikButton from "./FormikForm/FormikButton";
 
-import { useStore } from "../../utils/store/store";
+import { useStore, toggleLoggedInSelector } from "../../utils/store/store";
 import tryLoginUser from "../../utils/requests/tryLoginUser";
 
 const useStyles = makeStyles((theme) => ({
@@ -32,10 +32,10 @@ const validationSchema = yup.object({
 const LoginForm = () => {
   const { loginForm, validatedInput } = useStyles();
 
-  const setLoggedIn = useStore((state) => state.setLoggedIn);
+  const toggleLoggedIn = useStore(toggleLoggedInSelector);
 
   const handleLogin = (values, actions) =>
-    tryLoginUser(values, actions, setLoggedIn);
+    tryLoginUser(values, actions, toggleLoggedIn);
 
   return (
     <Box display="flex" justifyContent="center">

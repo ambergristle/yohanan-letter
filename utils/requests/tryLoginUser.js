@@ -6,14 +6,14 @@ import axios from "axios";
 const tryLoginUser = async (
   { email, password },
   { setFieldError },
-  setLoggedIn
+  toggleLoggedIn
 ) => {
   try {
     const response = await axios.post("/api/users/login", { email, password });
 
     // redirect and set loggedIn state
     Router.push("/publish");
-    return setLoggedIn(true);
+    return toggleLoggedIn();
   } catch (error) {
     if (error.response) {
       const { field, helperText } = error.response.data;

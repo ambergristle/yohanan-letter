@@ -29,30 +29,14 @@ export const initializeStore = (preloadedState = {}) =>
         (set, get) => ({
           ...initialState,
           ...preloadedState,
-          setLoggedIn: (loggedIn) => {
-            // on admin login
-            set({ loggedIn: loggedIn });
-          },
-          setSearch: (searchTerm) => {
-            // on user search
-            set({ search: searchTerm });
-          },
-          clearSearch: () => {
-            // on user clear
-            set({ search: initialState.search });
-          },
-          getTags: async () => {
-            // on load
-            // set({ tags: await tryGetTags() });
-          },
-          addFilter: (tag) => {
-            // on user select
-            set({ tags: get().filter.push(tag) });
-          },
-          popFilter: (tag) => {
-            // on user deselect
-            set({ tags: get().filter.pop(tag) });
-          },
+          toggleLoggedIn: () =>
+            set(({ loggedIn }) => ({ loggedIn: !loggedIn })),
+          setSearch: (searchTerm) => set({ search: searchTerm }),
+          clearSearch: () => set({ search: initialState.search }),
+          addFilter: (tag) =>
+            set(({ filter }) => ({ filter: filter.push(tag) })),
+          popFilter: (tag) =>
+            set(({ filter }) => ({ filter: filter.pop(tag) })),
         }),
         {
           name: "global-store",
@@ -61,6 +45,14 @@ export const initializeStore = (preloadedState = {}) =>
       )
     )
   );
+
+// memoize selectors
+export const getTagsSelector = (state) => state.tags;
+export const toggleLoggedInSelector = (state) => state.toggleLoggedIn;
+export const loggedInSelectors = (state) => [
+  state.loggedIn,
+  state.toggleLoggedIn,
+];
 
 // manage csr v ssr alignment
 export const useHydrate = (initialState) => {

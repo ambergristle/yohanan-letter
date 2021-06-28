@@ -10,19 +10,16 @@ import ActionButton from "../Nav/ActionButton";
 import Search from "./Search";
 import Filter from "./Filter";
 
-import { useStore } from "../../../utils/store/store";
+import { useStore, loggedInSelectors } from "../../../utils/store/store";
 
 import tryLogoutUser from "../../../utils/requests/tryLogoutUser";
 
 // site navigation, search (regex), filter (posts with tag(s))
 const DesktopMenu = () => {
-  const [loggedIn, setLoggedIn] = useStore((state) => [
-    state.loggedIn,
-    state.setLoggedIn,
-  ]);
+  const [loggedIn, toggleLoggedIn] = useStore(loggedInSelectors);
 
   const logIn = () => Router.push("/login");
-  const logOut = () => tryLogoutUser(setLoggedIn);
+  const logOut = () => tryLogoutUser(toggleLoggedIn);
 
   return (
     <Box width="100%" display={{ xs: "none", sm: "flex" }}>
