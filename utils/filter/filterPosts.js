@@ -12,6 +12,9 @@ const sortByDate = (a, b) => {
 // identify post keys to search in (date for sorting)
 const options = {
   keys: ["title", "text", "tags.name", "date"],
+  ignoreLocation: true,
+  minMatchCharLength: 2,
+  threshold: 0.4,
   sortFn: sortByDate,
 };
 

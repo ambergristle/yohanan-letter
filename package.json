@@ -1,6 +1,16 @@
 {
   "name": "yohanan-letter",
   "version": "0.1.0",
+  "author": "ambergristle",
+  "repository": "https://github.com/ambergristle/yohanan-letter",
+  "homepage": "https://www.yohananletter.com",
+  "description": "create and archive content for the yohanan letter, a weekly newsletter for investors and entrepreneurs",
+  "keywords": [
+    "newsletters",
+    "law",
+    "investing"
+  ],
+  "license": "UNLICENSED",
   "private": true,
   "scripts": {
     "dev": "next dev",

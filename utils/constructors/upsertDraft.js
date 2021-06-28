@@ -50,13 +50,14 @@ const createPosts = (date, posts) => ({
     const anySources = filteredSources.length > 0;
 
     return {
+      id: post.id,
+      date: date,
+      draft: true,
+      slug: toSlug(date, post.title),
+      title: post.title,
       text: text.replace(/<p><br><\/p>/g, ""),
       ...(anySources && { sources: createSources(filteredSources) }),
       tags: connectOrCreateTags(tags),
-      ...post,
-      draft: true,
-      date: date,
-      slug: toSlug(date, post.title),
     };
   }),
 });
@@ -71,22 +72,22 @@ const upsertPosts = (date, posts, publish) => ({
       where: { id: id },
       create: {
         id: id,
+        date: date,
+        slug: toSlug(date, post.title),
+        draft: publish ? false : true,
+        title: post.title,
         text: text.replace(/<p><br><\/p>/g, ""),
         ...(anySources && { sources: createSources(filteredSources) }),
         tags: connectOrCreateTags(tags),
-        ...post,
-        draft: publish ? false : true,
-        date: date,
-        slug: toSlug(date, post.title),
       },
       update: {
+        date: date,
+        slug: toSlug(date, post.title),
+        ...(publish && { draft: false }),
+        title: post.title,
         text: text.replace(/<p><br><\/p>/g, ""),
         ...(anySources && { sources: upsertSources(filteredSources) }),
         tags: connectOrCreateTags(tags),
-        ...post,
-        ...(publish && { draft: false }),
-        slug: toSlug(date, post.title),
-        date: date,
       },
     };
   }),
@@ -96,19 +97,31 @@ const upsertPosts = (date, posts, publish) => ({
 const upsertDraft = ({ id, date, posts, ...draft }, publish = false) => ({
   where: { id: id },
   create: {
-    id,
-    date,
-    slug: toSlug(date, ""),
-    draft: publish ? false : true,
-    posts: createPosts(date, posts),
-    ...draft,
-  },
-  update: {
-    posts: upsertPosts(date, posts, publish),
-    ...draft,
-    ...(publish && { draft: false }),
+    id: id,
     date: date,
     slug: toSlug(date, ""),
+    draft: publish ? false : true,
+    subject: draft.subject,
+    intro: draft.intro.replace(/<p><br><\/p>/g, ""),
+    posts: createPosts(date, posts),
+    outro: draft.outro.replace(/<p><br><\/p>/g, ""),
+  },
+  update: {
+    date: date,
+    slug: toSlug(date, ""),
+    ...(publish && { draft: false }),
+    subject: draft.subject,
+    intro: draft.intro.replace(/<p><br><\/p>/g, ""),
+    posts: upsertPosts(date, posts, publish),
+    outro: draft.outro.replace(/<p><br><\/p>/g, ""),
+  },
+  include: {
+    posts: {
+      include: {
+        sources: true,
+        tags: true,
+      },
+    },
   },
 });
 

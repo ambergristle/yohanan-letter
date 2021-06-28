@@ -12,7 +12,10 @@ const getUsers = async () => {
     });
 
     if (!response) return null;
-    return response.length > 0 ? response : null;
+
+    const users = response.map((user) => ({ password: "", ...user }));
+
+    return users.length > 0 ? users : null;
   } catch (error) {
     console.error(error);
     return null;

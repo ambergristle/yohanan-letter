@@ -1,32 +1,42 @@
 import { DateTime } from "luxon";
 import pug from "pug";
 
-import { segments, styles, strong, text } from "../constants/letter";
+import { segments, styles, strong, link, context } from "../constants/letter";
 const pugPath = "utils/constructors/template.pug";
 
 // convert first char in string to upper
 const toCamel = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
-const newLetter = ({ date, subject, intro, posts, ...draft }) => {
+const styleText = (content, strong, link, theme) => {
+  const regex = /<a href="(?<href>.*?[^?])?".*?>(?<text>.*?[^?])?<\/a>/g;
+  const styleLinks = (html) =>
+    html.replace(regex, (_m, href, text) => link[theme](href, text));
+
+  const html = content.replace(/<strong>/g, strong[theme]);
+  return styleLinks(html);
+};
+
+const newLetter = ({ date, subject, intro, posts, outro, ...draft }) => {
   const template = pug.compileFile(pugPath);
 
   // convert date to mm/dd/yy
-  const shortDate = DateTime.fromISO(date).toFormat("LL/dd/yy");
+  const shortDate = DateTime.fromObject(date).toFormat("LL/dd/yy");
 
   // convert date to zoned stamp
-  const longDate = DateTime.fromISO(date).toLocaleString(DateTime.DATE_FULL);
+  const longDate = DateTime.fromObject(date).toLocaleString(DateTime.DATE_FULL);
 
   const makeLetter = (theme) => {
     const letterData = {
       styles: { ...styles.all, ...styles[theme] },
-      text: text,
+      context: context,
       letter: {
         date: longDate,
-        intro: intro.replace("<strong>", strong["theme"]),
+        intro: styleText(intro, strong, link, theme),
         posts: posts.map(({ text, ...post }) => ({
-          text: text.replace("<strong>", strong["theme"]),
+          text: styleText(text, strong, link, theme),
           ...post,
         })),
+        outro: styleText(outro, strong, link, theme),
         ...draft,
       },
     };

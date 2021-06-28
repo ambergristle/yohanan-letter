@@ -27,7 +27,7 @@ const drafts = async (req, res) => {
         const archived = await prisma.letter.upsert(upsertDraft(draft, true));
         if (!archived) return res.status(500);
 
-        const singleSends = newLetter(draft);
+        const singleSends = newLetter(archived);
 
         const responses = await Promise.all(
           singleSends.map(async (send) => await tryScheduleLetter(send))

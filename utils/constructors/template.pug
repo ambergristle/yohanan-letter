@@ -19,16 +19,38 @@ html
               "color": styles.colorPrimary
             })
             tr: td(style={"padding": "15px"})
-            tr(style={"text-align": "center", "color": styles.colorSecondary})
+            tr(style={"text-align": "center"})
               td
-                strong(style={
-                  "font-size": "28px",
-                  "font-family": styles.fontSecondary
-                }) The Yohanan Letter
-                br
-                span Legal News for Investors and Entrepreneurs
-                br
-                em(style={"font-size": "12px"}) No Ads. No Fees. No Bullshit.
+                a(
+                  href="https://www.yohananletter.com"
+                  target="_blank"
+                  style={"color": styles.colorSecondary, "text-decoration": "none"}
+                  )
+                  strong(style={
+                    "font-size": "28px",
+                    "font-family": styles.fontSecondary
+                  }) The Yohanan Letter
+                  br
+                  span Legal News for Investors and Entrepreneurs
+                  br
+                  em(style={"font-size": "12px"}) No Ads. No Fees. No Bullshit.
+            tr: td(style={"padding": "15px"})
+            tr
+              td(style={"text-align": "center"})
+                a(
+                  href="https://cdn.forms-content.sg-form.com/b5a15d41-508c-11eb-b248-ea422c4fb1a2"
+                  target="_blank"
+                  ): button(style={
+                  "padding": "10px 20px",
+                  "background-color": styles.colorSecondary,
+                  "border-radius": "2em",
+                  "border": "none",
+                  "font-size": "12px",
+                  "font-family": styles.fontSecondary,
+                  "font-weight": "700",
+                  "color": styles.background,
+                  "cursor": "pointer"
+                }) Subscribe
             tr: td(style={"padding": "15px"})
             tr
               td
@@ -40,10 +62,10 @@ html
                   span Good Morning Investors and Entrepreneurs,
             tr: td !{letter.intro}
             tr: td(style={"padding": "15px"})      
-            each post in letter.posts
+            each post, index in letter.posts
               tr: td
                 button(style={
-                  "padding": "2px 6px",
+                  "padding": "2px 8px",
                   "border": "none",
                   "border-radius": "2em",
                   "background": styles.colorSecondary,
@@ -58,12 +80,15 @@ html
                     href=source.href
                     style={"color": styles.colorTertiary, "font-weight": "700"}
                   ) #{source.title}
-              tr: td(style={"padding": "15px"})
+              if letter.outro || index < letter.posts.length - 1
+                tr: td(style={"padding": "15px"})
+            if letter.outro
+              tr: td !{letter.outro}
             tr: td(style={"padding": "20px"})
             tr
               td
-                p: em #{text.bio}
-                p: span #{text.appeal}
+                p: em #{context.bio}
+                p: span #{context.appeal}
             tr: td(style={"padding": "30px"})
             tr
               td(style={"text-align": "center"})
@@ -86,7 +111,7 @@ html
               "font-size": "10px",
               "line-height": "1",
               "color": "rgba(192, 39, 57, 1)"
-            }) #{text.disclaimer}
+            }) #{context.disclaimer}
         td
     table(style={"width": "100%"})
       tr(style={

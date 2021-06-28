@@ -30,10 +30,17 @@ export const strong = {
   light: "<strong>",
 };
 
+export const link = {
+  dark: (href, text) =>
+    `<a href="${href}" style="color: rgba(50, 130, 184, 1)" target="_blank">${text}</a>`,
+  light: (href, text) =>
+    `<a href="${href}" style="color: rgba(50, 130, 184, 1)" target="_blank">${text}</a>`,
+};
+
 //  constant text injected in pug template
-export const text = {
+export const context = {
   bio:
-    "Adam Yohanan is a corporate finance lawyer at an international law firm based in New York. Adam represents borrowers and lenders in a variety of transactions, with an emphasis on leveraged and acquisition finance.Before entering private practice, Adam interned with the SEC Enforcement Division and the U.S. District Court for the Southern District of New York. Adam earned his law degree from Georgetown in 2019 and graduated summa cum laude from Tulane in 2016.",
+    "Adam Yohanan is a corporate finance lawyer at an international law firm based in New York. Adam represents borrowers and lenders in a variety of transactions, with an emphasis on leveraged and acquisition finance. Before entering private practice, Adam interned with the SEC Enforcement Division and the U.S. District Court for the Southern District of New York. Adam earned his law degree from Georgetown in 2019 and graduated summa cum laude from Tulane in 2016.",
   appeal:
     "Thank you for reading. If you like the newsletter or know someone that needs to see it, please do not hesitate to forward and ask them to subscribe.",
   disclaimer:
