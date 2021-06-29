@@ -4,20 +4,20 @@ import Post from "./Post";
 import Empty from "./Empty";
 
 import { useStore } from "../../utils/store/store";
-import filterPosts from "../../utils/filter/filterPosts";
+import searchArchive from "../../utils/filter/searchArchive";
 
 // render list of post previews; if only one returned, show full post
-const PostList = ({ posts, preview }) => {
-  const searchTerm = useStore((state) => state.search) || " ";
+const PostList = ({ posts }) => {
+  const searchTerm = useStore((state) => state.search);
 
-  if (posts) posts = filterPosts(posts, searchTerm);
+  if (posts && searchTerm) posts = searchArchive(posts, searchTerm);
 
   return (
     <Box>
       {posts ? (
         posts.map((post) => (
           <Box key={post.id} mb={2}>
-            <Post post={post} preview={preview} />
+            <Post post={post} />
           </Box>
         ))
       ) : (

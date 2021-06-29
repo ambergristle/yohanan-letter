@@ -9,22 +9,24 @@ const sortByDate = (a, b) => {
   return new Date(dateB) > new Date(dateA) ? 1 : -1;
 };
 
-// identify post keys to search in (date for sorting)
-const options = {
+const options = (searchTerm) => ({
   keys: ["title", "text", "tags.name", "date"],
   ignoreLocation: true,
-  minMatchCharLength: 2,
-  threshold: 0.4,
+  minMatchCharLength: searchTerm.length,
+  threshold: 0.0,
   sortFn: sortByDate,
-};
+});
+
+const search = (term) => `'"${term}"`;
+const filter = (tags) => tags.map((tag) => `=${tag}`).join(" ");
 
 // sort posts and filter by search term (if any)
-const filterPosts = (posts, searchTerm) => {
-  const fuse = new Fuse(posts, options);
+const searchArchive = (posts, searchTerm) => {
+  const fuse = new Fuse(posts, options(searchTerm));
 
   const filtered = fuse.search(searchTerm);
 
   return filtered.map(({ item }) => item);
 };
 
-export default filterPosts;
+export default searchArchive;

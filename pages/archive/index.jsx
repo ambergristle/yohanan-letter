@@ -19,6 +19,8 @@ const Archive = ({ posts }) => {
 
 // get posts server-side
 export const getServerSideProps = async (context) => {
+  const { topics } = context.query;
+
   // pass posts as props or redirect to 404
   const posts = (await getPosts()) || null;
 

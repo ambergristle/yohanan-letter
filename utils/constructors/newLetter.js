@@ -42,7 +42,8 @@ const newLetter = ({ date, subject, intro, posts, outro, ...draft }) => {
     };
 
     return {
-      name: `${shortDate} - ${toCamel(theme)}`,
+      // name: `${shortDate} - ${toCamel(theme)}`,
+      name: `${shortDate} - Combined`,
       send_at: date,
       send_to: {
         segment_ids: [segments[theme]],
@@ -58,7 +59,8 @@ const newLetter = ({ date, subject, intro, posts, outro, ...draft }) => {
     };
   };
 
-  return [makeLetter("dark"), makeLetter("light")];
+  // return [makeLetter("dark"), makeLetter("light")];
+  return [makeLetter("light")];
 };
 
 export default newLetter;

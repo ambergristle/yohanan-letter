@@ -16,7 +16,11 @@ import ScheduleIcon from "@material-ui/icons/Schedule";
 
 const useStyles = makeStyles((theme) => ({
   controlBox: { margin: "4px 0px" },
-  controlButton: { marginRight: "10px" },
+  controlButton: {
+    marginRight: "10px",
+    // color: "white !important",
+    // backgroundColor: "rgba(123, 199, 77, 1) !important",
+  },
   dateField: { marginBottom: 0 },
 }));
 
@@ -34,9 +38,10 @@ const Controls = ({ draft }) => {
   };
 
   const handleSubmit = (event) => {
+    setSubmitting(true);
+
     const submitAction = event.target.innerText;
 
-    setSubmitting(true);
     tryPublishDraft(values, submitAction);
 
     return setSubmitting(false);

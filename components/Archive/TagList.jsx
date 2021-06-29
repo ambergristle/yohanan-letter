@@ -1,3 +1,4 @@
+import Router from "next/router";
 import { Box, Chip, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -8,8 +9,8 @@ const useStyles = makeStyles((theme) => ({
 const TagList = ({ tags }) => {
   const { tagChip } = useStyles();
 
-  const filter = (tagId) => {
-    console.log(tagId);
+  const filter = (name) => {
+    Router.push(`/archive?topics=${name}`);
   };
 
   return (
@@ -18,7 +19,7 @@ const TagList = ({ tags }) => {
         <Chip
           key={id}
           label={name}
-          onClick={() => filter(id)}
+          onClick={() => filter(name)}
           size="small"
           disableRipple
           className={tagChip}

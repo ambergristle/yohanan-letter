@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
 const Filter = () => {
   const { tagFilters } = useStyles();
 
-  const tags = useStore(getTagsSelector);
+  // const tags = useStore(getTagsSelector);
+  const tags = [];
 
   return (
     <Box

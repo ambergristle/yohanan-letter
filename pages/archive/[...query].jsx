@@ -19,7 +19,7 @@ const ArchiveQuery = ({ posts }) => {
 
 // get posts server-side
 export const getServerSideProps = async (context) => {
-  const { query } = context.query;
+  const { query, topics } = context.query;
 
   const slug = query.join("/");
 

@@ -1,8 +1,9 @@
 import { useFormikContext } from "formik";
 import { Box, Button, CircularProgress, makeStyles } from "@material-ui/core";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 const useStyles = makeStyles((theme) => ({
-  submitting: {
+  buttonOverlay: {
     position: "absolute",
     top: "50%",
     left: "50%",
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 // map formik props to Button component
 // display form-wide errors; disable when invalid or submitting
 const FormikButton = ({ type, label, startIcon, endIcon, ...props }) => {
-  const { submitting } = useStyles();
+  const { buttonOverlay } = useStyles();
 
   const { isSubmitting, isValid, dirty, errors, values } = useFormikContext();
   const pending = !isValid || !dirty || isSubmitting; // disable when invalid or submitting
@@ -39,7 +40,14 @@ const FormikButton = ({ type, label, startIcon, endIcon, ...props }) => {
           <CircularProgress
             size={24}
             color="secondary"
-            className={submitting}
+            className={buttonOverlay}
+          />
+        )}
+        {false && (
+          <CheckCircleIcon
+            size={24}
+            color="secondary"
+            className={buttonOverlay}
           />
         )}
         {error && <FormHelperText error>{error}</FormHelperText>}
