@@ -56,8 +56,9 @@ App.getInitialProps = async (appContext) => {
   };
 
   // only import function server-side to avoid prisma error
-  const getTags = { ...(await import("../utils/queries/getTags")) }.default;
-  const tags = await getTags();
+  // const getTags = { ...(await import("../utils/queries/getTags")) }.default;
+  // const tags = await getTags();
+  const tags = [];
 
   const jid = req.cookies.jid;
 
