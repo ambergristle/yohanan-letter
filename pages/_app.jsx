@@ -60,7 +60,8 @@ App.getInitialProps = async (appContext) => {
   // const tags = await getTags();
   const tags = [];
 
-  const jid = req.cookies.jid;
+  // const jid = req.cookies.jid;
+  const jid = false;
 
   // overwrite default store with initial values if query successful
   return {
