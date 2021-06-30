@@ -14,7 +14,7 @@ const options = (searchTerm) => ({
   ignoreLocation: true,
   minMatchCharLength: searchTerm.length,
   threshold: 0.0,
-  sortFn: sortByDate,
+  // sortFn: sortByDate,
 });
 
 const search = (term) => `'"${term}"`;
