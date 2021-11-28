@@ -22,18 +22,27 @@ export const styles = {
     colorSecondary: "rgba(20, 39, 78, 1)",
     colorTertiary: "rgba(50, 130, 184, 1)",
   },
+  combined: {
+    background: "rgba(241, 246, 249, 1)",
+    colorPrimary: "rgba(20, 39, 78, 1)",
+    colorSecondary: "rgba(20, 39, 78, 1)",
+    colorTertiary: "rgba(50, 130, 184, 1)",
+  },
 };
 
 // modular bold (content) styling
 export const strong = {
   dark: "<strong style='color: rgba(252, 218, 183, 1)'>",
   light: "<strong>",
+  combined: "<strong>",
 };
 
 export const link = {
   dark: (href, text) =>
     `<a href="${href}" style="color: rgba(50, 130, 184, 1)" target="_blank">${text}</a>`,
   light: (href, text) =>
+    `<a href="${href}" style="color: rgba(50, 130, 184, 1)" target="_blank">${text}</a>`,
+  combined: (href, text) =>
     `<a href="${href}" style="color: rgba(50, 130, 184, 1)" target="_blank">${text}</a>`,
 };
 

@@ -46,7 +46,8 @@ const newLetter = ({ date, subject, intro, posts, outro, ...draft }) => {
       name: `${shortDate} - Combined`,
       send_at: date,
       send_to: {
-        segment_ids: [segments[theme]],
+        // segment_ids: [segments[theme]],
+        all: true,
       },
       email_config: {
         subject: subject,
