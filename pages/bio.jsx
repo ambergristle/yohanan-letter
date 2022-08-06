@@ -23,10 +23,17 @@ const Bio = () => {
         justify="space-around"
       >
         <Typography variant="h6" color="textPrimary" align="justify">
-          Adam Yohanan is a corporate finance lawyer at an international law
-          firm based in New York. Adam represents borrowers and lenders in a
-          variety of transactions, with an emphasis on leveraged and acquisition
-          finance. Before entering private practice, Adam interned with the SEC
+          Adam Yohanan is a lending transactions attorney at an international
+          bank based in New York City.
+        </Typography>
+        <Typography variant="h6" color="textPrimary" align="justify">
+          Prior to joining the bank, Adam was a finance associate at two
+          top-ranked international law firms, where he represented private
+          equity funds, private credit funds, public companies, and investment
+          banks in multi-billion dollar U.S. and cross border transactions.
+        </Typography>
+        <Typography variant="h6" color="textPrimary" align="justify">
+          Before entering private practice, Adam interned with the SEC
           Enforcement Division and the U.S. District Court for the Southern
           District of New York. Adam earned his law degree from Georgetown in
           2019 and graduated summa cum laude from Tulane in 2016.
